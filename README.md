@@ -1,6 +1,6 @@
-# mockup
+# Design @ UCI: Mockup
 
-A single-page portfolio/landing site built with React and Vite.
+A single-page website built with React and Vite.
 
 ## Tech Stack
 
