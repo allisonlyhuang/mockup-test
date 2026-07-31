@@ -80,6 +80,12 @@ export default function Sidebar({ lenis }) {
           );
         })}
       </ul>
+
+      {/* Contact Us — pinned to bottom */}
+      <div style={styles.contactWrapper}>
+        <div style={styles.divider} />
+        <a href="mailto:" style={styles.contactLink}>Contact Us</a>
+      </div>
     </nav>
   );
 }
@@ -149,6 +155,18 @@ const styles = {
     background: '#E5E5E5',
     margin: '0 0 0.75rem',
     flexShrink: 0,
+  },
+  contactWrapper: {
+    marginTop: 'auto',
+  },
+  contactLink: {
+    display: 'block',
+    fontSize: 13,
+    fontFamily: 'inherit',
+    fontWeight: 500,
+    color: 'var(--text)',
+    textDecoration: 'none',
+    padding: '0.4rem 0.5rem',
   },
 };
 
