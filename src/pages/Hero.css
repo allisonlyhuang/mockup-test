@@ -1,0 +1,163 @@
+@import url('https://fonts.googleapis.com/css2?family=Fustat:wght@800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+/* ── Entrance keyframe ── */
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Face-rise also cancels its vertical offset ── */
+@keyframes hero-rise-face {
+  from {
+    opacity: 0;
+    transform: translateY(calc(clamp(-4px, -0.8vw, -12px) + 18px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(clamp(-4px, -0.8vw, -12px));
+  }
+}
+
+/* ── Arrow slides in from the right ── */
+@keyframes hero-slide-right {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* shared animation base */
+.hero-animate {
+  opacity: 0;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+  animation-duration: 0.7s;
+}
+
+.hero-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: clamp(2rem, 8vw, 6rem) clamp(1.5rem, 8vw, 7rem);
+}
+
+/* ── Wrapper ── */
+.hero-lockup {
+  margin-top: -18rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0;
+  user-select: none;
+  transform: scale(0.6);
+  transform-origin: left center;
+}
+
+/* ── Main logo row: m + face + ckup + arrow ── */
+.hero-logo-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  line-height: 0.88;
+  margin-left: -0.75rem;
+  cursor: url('/cursor_with_year.svg') 5 5, auto;
+}
+
+/* Shared text style for "m" and "ckup" */
+.hero-letter {
+  font-family: 'Fustat', system-ui, sans-serif;
+  font-size: clamp(80px, 20vw, 309px);
+  font-weight: 800;
+  color: #000000;
+  letter-spacing: -0.1em;
+  line-height: 0.88;
+  display: inline-block;
+}
+
+/* "m" — pull face slightly left */
+.hero-letter-m {
+  margin-right: -0.03em;
+  animation-name: hero-rise;
+  animation-delay: 0.1s;
+}
+
+/* ── Face wrapper (positions the overlay eyes) ── */
+.hero-face-wrap {
+  position: relative;
+  z-index: 1;
+  height: clamp(55px, 14.4vw, 222px);
+  width:  clamp(55px, 14.4vw, 222px);
+  display: inline-block;
+  flex-shrink: 0;
+  transform: translateY(clamp(-4px, -0.8vw, -12px));
+  margin-left:  0;
+  margin-right: 0;
+  animation-name: hero-rise-face;
+  animation-delay: 0.2s;
+}
+
+.hero-face-o {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* ── Overlay eyes ── */
+.hero-eye {
+  position: absolute;
+  width:  8.7%;
+  height: 8.7%;
+  background: black;
+  border-radius: 50%;
+  pointer-events: none;
+  /* translate(-50%,-50%) centres the div on its anchor point */
+  transform: translate(-50%, -50%);
+}
+
+/* Pull "ckup" left to cancel the trailing letter-spacing gap left by the face */
+.hero-letter-ckup {
+  margin-left: -0.12em;
+  animation-name: hero-rise;
+  animation-delay: 0.3s;
+}
+
+/* ── Arrow accent ── */
+.hero-arrow {
+  height: clamp(60px, 12vw, 180px);
+  width:  auto;
+  display: inline-block;
+  flex-shrink: 0;
+  margin-left: clamp(4px, 1vw, 16px);
+  align-self: center;
+  margin-bottom: clamp(2px, 0.4vw, 8px);
+  animation-name: hero-slide-right;
+  animation-delay: 0.5s;
+}
+
+/* ── "by design at uci" ── */
+.hero-subtitle {
+  font-family: 'Fustat', system-ui, sans-serif;
+  font-size: 67.931px;
+  font-style: normal;
+  font-weight: 800;
+  color: #0D9AFF;
+  letter-spacing: 1.359px;
+  line-height: normal;
+  margin: clamp(-2rem, -4vw, -0.5rem) 0 0;
+  animation-name: hero-rise;
+  animation-delay: 0.45s;
+}
