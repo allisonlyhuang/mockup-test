@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { ChevronDown } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -167,7 +168,7 @@ export default function Hero() {
           });
         }}>
           <span className="hero-learn-more-label">Learn More</span>
-          <span className="hero-learn-more-chevron" ref={chevronRef}>&#8964;</span>
+          <ChevronDown ref={chevronRef} className="hero-learn-more-chevron" size={20} strokeWidth={1.5} />
         </button>
       </section>
     </>

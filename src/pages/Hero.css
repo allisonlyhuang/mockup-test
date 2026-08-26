@@ -271,8 +271,6 @@
 }
 
 .hero-learn-more-chevron {
-  font-size: 20px;
   color: #2e2e2e;
-  line-height: 1;
-  margin-top: -0.09em;
+  display: block;
 }
