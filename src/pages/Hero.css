@@ -46,6 +46,7 @@
 }
 
 .hero-section {
+  position: relative;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -54,16 +55,39 @@
   padding: clamp(2rem, 8vw, 6rem) clamp(1.5rem, 8vw, 7rem);
 }
 
+.hero-main-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 0rem;
+}
+
+.hero-right {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: -20%;
+  margin-top: -20%;
+}
+
 /* ── Wrapper ── */
 .hero-lockup {
-  margin-top: -18rem;
+  margin-top: -21rem;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 0;
   user-select: none;
+  -webkit-user-select: none;
   transform: scale(0.6);
   transform-origin: left center;
+}
+
+.hero-lockup * {
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* ── Main logo row: m + face + ckup + arrow ── */
@@ -75,6 +99,7 @@
   line-height: 0.88;
   margin-left: -0.75rem;
   cursor: url('/cursor_with_year.svg') 5 5, auto;
+  user-select: none;
 }
 
 /* Shared text style for "m" and "ckup" */
@@ -100,11 +125,11 @@
   position: relative;
   z-index: 1;
   height: clamp(55px, 14.4vw, 222px);
-  width:  clamp(55px, 14.4vw, 222px);
+  width: clamp(55px, 14.4vw, 222px);
   display: inline-block;
   flex-shrink: 0;
   transform: translateY(clamp(-4px, -0.8vw, -12px));
-  margin-left:  0;
+  margin-left: 0;
   margin-right: 0;
   animation-name: hero-rise-face;
   animation-delay: 0.2s;
@@ -119,12 +144,11 @@
 /* ── Overlay eyes ── */
 .hero-eye {
   position: absolute;
-  width:  8.7%;
+  width: 8.7%;
   height: 8.7%;
   background: black;
   border-radius: 50%;
   pointer-events: none;
-  /* translate(-50%,-50%) centres the div on its anchor point */
   transform: translate(-50%, -50%);
 }
 
@@ -138,7 +162,7 @@
 /* ── Arrow accent ── */
 .hero-arrow {
   height: clamp(60px, 12vw, 180px);
-  width:  auto;
+  width: auto;
   display: inline-block;
   flex-shrink: 0;
   margin-left: clamp(4px, 1vw, 16px);
@@ -146,6 +170,29 @@
   margin-bottom: clamp(2px, 0.4vw, 8px);
   animation-name: hero-slide-right;
   animation-delay: 0.5s;
+}
+
+/* ── Email tooltip ── */
+.hero-email-tooltip {
+  height: auto;
+  width: clamp(350px, 50vw, 700px);
+  margin-bottom: 0.5em;
+  animation-name: hero-rise;
+  animation-delay: 0s;
+}
+
+/* ── "Welcome to" label ── */
+.hero-welcome {
+  margin: 0 0 -0.5em 0.1em;
+  color: var(--Black-8, rgba(0, 0, 0, 0.80));
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 17.036px;
+  letter-spacing: 0.11px;
+  animation-name: hero-rise;
+  animation-delay: 0.05s;
 }
 
 /* ── "by design at uci" ── */
@@ -157,7 +204,75 @@
   color: #0D9AFF;
   letter-spacing: 1.359px;
   line-height: normal;
-  margin: clamp(-2rem, -4vw, -0.5rem) 0 0;
+  margin: clamp(-1rem, -2vw, 0.5rem) 0 0;
   animation-name: hero-rise;
   animation-delay: 0.45s;
+}
+
+/* ── "when ideas meet creators" ── */
+.hero-tagline {
+  font-size: 68px;
+  font-style: normal;
+  font-weight: 300;
+  color: #000000;
+  letter-spacing: 1.359px;
+  line-height: 1;
+  margin: 1em 0 0;
+  animation-name: hero-rise;
+  animation-delay: 0.55s;
+  display: flex;
+  align-items: center;
+  gap: 0.15em;
+}
+
+.hero-tagline-highlight {
+  color: #ffffff;
+  background: #000000;
+  padding: 0 0.15em;
+  border-radius: 2px;
+  display: inline-flex;
+  align-items: center;
+  font-weight: 400;
+  line-height: 1;
+  height: 1em;
+}
+
+.hero-body {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.80);
+  line-height: 1.6;
+  margin-top: -4rem;
+}
+
+/* ── Learn More button ── */
+.hero-learn-more {
+  position: absolute;
+  bottom: 15rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  user-select: none;
+}
+
+.hero-learn-more-label {
+  font-size: 12px;
+  font-weight: 300;
+  color: #2e2e2e;
+  letter-spacing: 0.01em;
+}
+
+.hero-learn-more-chevron {
+  font-size: 20px;
+  color: #2e2e2e;
+  line-height: 1;
+  margin-top: -0.09em;
 }
