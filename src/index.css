@@ -19,7 +19,6 @@
   letter-spacing: 0.18px;
   color-scheme: light dark;
   color: var(--text);
-  background: var(--bg);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -53,6 +52,10 @@
 body {
   margin: 0;
   cursor: url('/cursor.svg') 0 0, auto;
+  background-image: url('/src/assets/template.jpg');
+  background-size: auto;
+  background-repeat: repeat;
+  background-position: top left;
 }
 
 #root {

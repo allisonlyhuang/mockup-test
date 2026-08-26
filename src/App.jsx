@@ -4,6 +4,7 @@ import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 
+import Notification from './components/Notification';
 import Sidebar from './components/Sidebar';
 import Hero from './pages/Hero';
 import AboutUs from './pages/AboutUs';
@@ -40,6 +41,9 @@ export default function App() {
 
   return (
     <div ref={containerRef} style={styles.root}>
+      <div style={styles.notification}>
+        <Notification />
+      </div>
       <Sidebar lenis={lenis} />
       <main style={styles.main}>
         <Hero />
@@ -58,6 +62,12 @@ const styles = {
     alignItems: 'flex-start',
     width: '100%',
     minHeight: '100vh',
+  },
+  notification: {
+    position: 'fixed',
+    top: '24px',
+    right: '24px',
+    zIndex: 1000,
   },
   main: {
     flex: 1,
