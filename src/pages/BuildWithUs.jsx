@@ -1,4 +1,5 @@
 import './BuildWithUs.css';
+import { Link } from 'react-router-dom';
 import InquiryForm from '../components/InquiryForm';
 import { MoveRight } from 'lucide-react';
 
@@ -23,9 +24,9 @@ export default function BuildWithUs() {
             project from concept to completion. Send us an inquiry and we'll get back to you!
             <br /><br />
             <strong>Are you a student?</strong> Applications open Fall and Spring.{' '}
-            <a href="#" className="build-apply-link">
+            <Link to="/apply" className="build-apply-link">
               Apply here <MoveRight size={13} strokeWidth={2.5} style={{ verticalAlign: 'middle' }} />
-            </a>
+            </Link>
           </p>
         </div>
 

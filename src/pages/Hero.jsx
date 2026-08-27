@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { ChevronDown, MoveRight } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -88,7 +89,7 @@ export default function Hero() {
         <p className="hero-body">
           Connecting student UI/UX designers with real clients, impactful projects, and career-defining experience.</p>
 
-        <p className="hero-body" style={{ whiteSpace: 'nowrap', margin: '0 0 0.75rem' }}>From portfolios to partnerships. Applications for Fall 2026 open now.{' '}<a href="#" className="hero-apply-link">Apply here <MoveRight size={13} strokeWidth={2.5} style={{ verticalAlign: 'middle' }} /></a></p>
+        <p className="hero-body" style={{ whiteSpace: 'nowrap', margin: '0 0 0.75rem' }}>From portfolios to partnerships. Applications for Fall 2026 open now.{' '}<Link to="/apply" className="hero-apply-link">Apply here <MoveRight size={13} strokeWidth={2.5} style={{ verticalAlign: 'middle' }} /></Link></p>
 
         <button className="hero-learn-more" onClick={() => {
           const target = document.getElementById('about-us');

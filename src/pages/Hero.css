@@ -83,11 +83,13 @@
   -webkit-user-select: none;
   transform: scale(0.6);
   transform-origin: left center;
+  pointer-events: none;
 }
 
 .hero-lockup * {
   user-select: none;
   -webkit-user-select: none;
+  pointer-events: none;
 }
 
 /* ── Main logo row: m + face + ckup + arrow ── */
@@ -179,6 +181,8 @@
   margin-bottom: 0.5em;
   animation-name: hero-rise;
   animation-delay: 0s;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 /* ── "Welcome to" label ── */
@@ -277,6 +281,8 @@
 
 /* ── Apply link ── */
 .hero-apply-link {
+  position: relative;
+  z-index: 1;
   color: #0D9AFF;
   text-decoration: underline;
   text-underline-offset: 3px;
