@@ -1,0 +1,26 @@
+.projects-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(3rem, 8vw, 6rem) 0;
+  box-sizing: border-box;
+  overflow-x: clip;
+}
+
+.projects-heading {
+  margin-bottom: 1.25rem;
+  padding-left: clamp(2rem, 8vw, 7rem);
+  padding-right: clamp(2rem, 8vw, 7rem);
+}
+
+.projects-subtitle {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.65;
+  margin-bottom: 3rem;
+  max-width: 680px;
+  padding-left: clamp(2rem, 8vw, 7rem);
+}
