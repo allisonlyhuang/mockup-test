@@ -60,8 +60,8 @@ export default function Projects() {
     <section id="projects" className="projects-section">
       <h1 className="page-heading projects-heading">our projects</h1>
       <p className="projects-subtitle">
-        Every MockUp engagement follows a structured five-phase process — from
-        research to launch — so students build real skills and companies get
+        Every MockUp engagement follows a structured five-phase process, from
+        research to launch, so students build real skills and companies get
         work they can ship.
       </p>
       <PhaseSlider phases={phases} frame={frameSvg} />

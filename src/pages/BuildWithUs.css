@@ -1,0 +1,47 @@
+.build-section {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: clamp(3rem, 8vw, 6rem) clamp(2rem, 8vw, 7rem);
+  box-sizing: border-box;
+}
+
+.build-body {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4rem;
+}
+
+.build-left {
+  flex: 0 0 600px;
+  max-width: 600px;
+}
+
+.build-subtitle {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.65;
+  margin: 0;
+}
+
+.build-apply-link {
+  color: #0D9AFF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.build-apply-link:hover {
+  color: #0770bb;
+}
+
+.build-right {
+  flex-shrink: 0;
+  width: 300px;
+}

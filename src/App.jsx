@@ -11,7 +11,7 @@ import AboutUs from './pages/AboutUs';
 import Mission from './pages/Mission';
 import Values from './pages/Values';
 import Projects from './pages/Projects';
-import JoinUs from './pages/JoinUs';
+import BuildWithUs from './pages/BuildWithUs';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -52,7 +52,7 @@ export default function App() {
         <Mission />
         <Values />
         <Projects />
-        <JoinUs />
+        <BuildWithUs />
       </main>
     </div>
   );

@@ -2,6 +2,7 @@ import { useRef } from 'react';
 import './Mission.css';
 import selectedBox from '../assets/mission/selected_box.svg';
 import VectorDrawOn from '../components/VectorDrawOn';
+import CommentPin from '../components/CommentPin';
 
 export default function Mission() {
   const contentRef = useRef(null);
@@ -26,6 +27,10 @@ export default function Mission() {
           </p>
         </div>
       </div>
+
+      <CommentPin style={{ bottom: '5rem', left: '18rem' }} author="Queena Liu" comment="Love this direction!" entranceDelay={0} />
+      <CommentPin style={{ top: '10rem', left: '6rem' }} author="Evie Ngo" comment="Love this direction!" entranceDelay={0.12} />
+      <CommentPin style={{ top: '18rem', right: '24rem' }} author="Allison Huang" comment="I truly love the community at Design@UCI and am excited for an opportunity to give back to a club that has shown me so much love." entranceDelay={0.24} />
     </section>
   );
 }

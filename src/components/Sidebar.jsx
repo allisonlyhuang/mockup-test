@@ -48,7 +48,7 @@ const NAV_ITEMS = [
   { label: 'Mission',          id: 'mission' },
   { label: 'Values',           id: 'values' },
   { label: 'Projects',         id: 'projects' },
-  { label: 'Join Us',          id: 'join-us' },
+  { label: 'Build With Us',          id: 'build-with-us' },
 ];
 
 // ── Figma-style tooltip ───────────────────────────────────────────────────────
