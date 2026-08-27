@@ -274,3 +274,16 @@
   color: #2e2e2e;
   display: block;
 }
+
+/* ── Apply link ── */
+.hero-apply-link {
+  color: #0D9AFF;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.hero-apply-link:hover {
+  color: #0770bb;
+}

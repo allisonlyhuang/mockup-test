@@ -216,6 +216,27 @@ export default function Sidebar({ lenis }) {
         ))}
       </ul>
 
+      {/* Spacer pushes Apply tab to the very bottom */}
+      <div style={{ flex: 1 }} />
+
+      {/* Apply tab — pinned to bottom of sidebar */}
+      <div style={styles.divider} />
+      <a
+        href="https://linktr.ee/mockup.uci"
+        target="_blank"
+        rel="noopener noreferrer"
+        style={styles.applyTab}
+        onMouseEnter={e => {
+          e.currentTarget.style.background = 'rgba(13,154,255,0.12)';
+          e.currentTarget.style.color = '#0D9AFF';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.background = 'transparent';
+          e.currentTarget.style.color = '#555';
+        }}
+      > Apply F26
+      </a>
+
     </nav>
   );
 }
@@ -325,5 +346,21 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '0.1rem',
+  },
+  applyTab: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '0.4rem',
+    borderRadius: 5,
+    fontSize: 14,
+    fontFamily: 'inherit',
+    fontWeight: 500,
+    color: '#555',
+    textDecoration: 'none',
+    background: 'transparent',
+    transition: 'background 0.15s, color 0.15s',
+    width: '100%',
+    boxSizing: 'border-box',
   },
 };

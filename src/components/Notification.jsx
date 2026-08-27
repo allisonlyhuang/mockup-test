@@ -41,7 +41,7 @@ export default function Notification({
       </div>
       <div style={styles.actions}>
         <button style={styles.button} onClick={onApply}>
-          Apply
+          <strong>Apply</strong>
         </button>
         <div style={styles.dividerH} />
         <button style={styles.button} onClick={handleDismiss}>
@@ -81,7 +81,7 @@ const styles = {
   message: {
     margin: 0,
     color: "#ffffff",
-    fontSize: "12px",
+    fontSize: "14px",
     fontWeight: "500",
     lineHeight: "1.4",
   },
@@ -106,7 +106,7 @@ const styles = {
     background: "none",
     border: "none",
     color: "#ffffff",
-    fontSize: "12px",
+    fontSize: "14px",
     fontWeight: "500",
     cursor: "pointer",
     padding: "0 14px",
