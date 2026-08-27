@@ -1,0 +1,69 @@
+.mission-section {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(3rem, 8vw, 6rem) clamp(2rem, 8vw, 7rem);
+  box-sizing: border-box;
+  overflow: hidden;
+  user-select: none;
+}
+
+.mission-vector-wrap {
+  position: relative;
+  z-index: 1;
+  width: clamp(260px, 40vw, 460px);
+  height: auto;
+  margin-bottom: -2rem;
+  margin-left: -5rem;
+  align-self: flex-start;
+  pointer-events: none;
+}
+
+.mission-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 7rem;
+  margin-left: -5rem;
+}
+
+.mission-card {
+  position: relative;
+  padding: 2rem 2.25rem;
+  margin-top: -1rem;
+}
+
+.mission-box-decor {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  user-select: none;
+}
+
+.mission-body {
+  font-family: Inter, system-ui, sans-serif;
+  font-size: clamp(15px, 1.6vw, 18px);
+  font-weight: 400;
+  color: #1a1a1a;
+  line-height: 1.7;
+  margin: 0;
+  position: relative;
+  z-index: 1;
+  user-select: none;
+}
+
+.mission-highlight {
+  background: #cce8ff;
+  color: #0D9AFF;
+  border-radius: 4px;
+  padding: 1px 6px;
+  font-weight: 500;
+}
