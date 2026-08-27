@@ -43,11 +43,12 @@ const SOCIAL_ITEMS = [
 ];
 
 const NAV_ITEMS = [
-  { label: 'Hero',          id: 'hero' },
-  { label: 'About Us',      id: 'about-us' },
-  { label: 'Projects',      id: 'projects' },
-  { label: 'Project Scope', id: 'project-scope' },
-  { label: 'Join Us',       id: 'join-us' },
+  { label: 'Hero',             id: 'hero' },
+  { label: 'About Us',         id: 'about-us' },
+  { label: 'Mission',          id: 'mission' },
+  { label: 'Values',           id: 'values' },
+  { label: 'Projects',         id: 'projects' },
+  { label: 'Join Us',          id: 'join-us' },
 ];
 
 // ── Figma-style tooltip ───────────────────────────────────────────────────────

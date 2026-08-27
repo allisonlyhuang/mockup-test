@@ -38,7 +38,7 @@ export default function AboutUs() {
           <p style={styles.para}>
             Starting with our 9-week program with <strong>Roblox</strong>, MockUp will
             have unique opportunities open every Fall and Spring quarter. Keep an eye
-            out weeks 0–1, don't miss our applications!
+            out weeks 0–1 for opportunities to get involved, don't miss our applications!
           </p>
 
           <p style={{ ...styles.para, fontWeight: 700, marginTop: '1.5rem' }}>

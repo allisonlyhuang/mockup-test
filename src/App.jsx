@@ -8,8 +8,9 @@ import Notification from './components/Notification';
 import Sidebar from './components/Sidebar';
 import Hero from './pages/Hero';
 import AboutUs from './pages/AboutUs';
+import Mission from './pages/Mission';
+import Values from './pages/Values';
 import Projects from './pages/Projects';
-import ProjectScope from './pages/ProjectScope';
 import JoinUs from './pages/JoinUs';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -48,8 +49,9 @@ export default function App() {
       <main style={styles.main}>
         <Hero />
         <AboutUs />
+        <Mission />
+        <Values />
         <Projects />
-        <ProjectScope />
         <JoinUs />
       </main>
     </div>
