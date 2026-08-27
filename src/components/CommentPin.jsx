@@ -27,7 +27,7 @@ export default function CommentPin({
   const PIN_R = '100% 100% 100% 5%';
 
   // Expanded dimensions
-  const BUB_W = 290;
+  const BUB_W = 300;
   const BUB_R = '14px 14px 14px 2px';
 
   useLayoutEffect(() => {
@@ -94,7 +94,7 @@ export default function CommentPin({
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Hidden measurement div — always rendered, invisible, used to compute natural height */}
+      {/* Hidden measurement div — mirrors bubble exactly to compute natural height */}
       <div
         ref={measureRef}
         style={{
@@ -102,17 +102,22 @@ export default function CommentPin({
           visibility: 'hidden',
           pointerEvents: 'none',
           width: BUB_W,
-          padding: '12px 14px',
+          padding: '16px 18px 12px',
           boxSizing: 'border-box',
           display: 'flex',
-          flexDirection: 'column',
-          gap: 8,
+          gap: 10,
         }}
       >
-        <div style={{ height: 28 }} />
-        <p style={{ margin: 0, fontSize: 13, lineHeight: 1.5, fontFamily: 'Inter, system-ui, sans-serif' }}>
-          {comment}
-        </p>
+        <div style={{ width: 28, flexShrink: 0 }} />
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+          <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+            <span style={{ fontSize: 13, fontWeight: 600, lineHeight: 1.3, fontFamily: 'Inter, system-ui, sans-serif' }}>{author}</span>
+            <span style={{ fontSize: 11, lineHeight: 1.3, fontFamily: 'Inter, system-ui, sans-serif' }}>{timestamp}</span>
+          </div>
+          <p style={{ margin: 0, fontSize: 13, lineHeight: 1.5, fontFamily: 'Inter, system-ui, sans-serif' }}>
+            {comment}
+          </p>
+        </div>
       </div>
 
       {/* Anchor wrapper — fixes bottom-left corner in place */}
@@ -168,13 +173,14 @@ export default function CommentPin({
             inset: 0,
             display: 'none',
             flexDirection: 'column',
-            padding: '13px 13px',
-            gap: 8,
+            padding: '16px 18px 12px',
+            gap: 6,
             opacity: 0,
           }}
         >
-          {/* Author row */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+          {/* Avatar + right column */}
+          <div style={{ display: 'flex', alignItems: 'flex-start', gap: 10 }}>
+            {/* Avatar */}
             <div style={{
               width: 28,
               height: 28,
@@ -191,26 +197,27 @@ export default function CommentPin({
             }}>
               {avatarInitial}
             </div>
-            <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
-              <span style={{ fontSize: 13, fontWeight: 600, color: '#ffffff', fontFamily: 'Inter, system-ui, sans-serif' }}>
-                {author}
-              </span>
-              <span style={{ fontSize: 12, color: '#8e8e93', fontFamily: 'Inter, system-ui, sans-serif' }}>
-                {timestamp}
-              </span>
+            {/* Right column: name+timestamp, then comment */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+              <div style={{ display: 'flex', alignItems: 'baseline', gap: 6 }}>
+                <span style={{ fontSize: 13, fontWeight: 600, color: '#ffffff', fontFamily: 'Inter, system-ui, sans-serif', lineHeight: 1.3 }}>
+                  {author}
+                </span>
+                <span style={{ fontSize: 11, color: '#8e8e93', fontFamily: 'Inter, system-ui, sans-serif', lineHeight: 1.3 }}>
+                  {timestamp}
+                </span>
+              </div>
+              <p style={{
+                margin: 0,
+                fontSize: 13,
+                lineHeight: 1.5,
+                color: '#f0f0f0',
+                fontFamily: 'Inter, system-ui, sans-serif',
+              }}>
+                {comment}
+              </p>
             </div>
           </div>
-
-          {/* Comment text */}
-          <p style={{
-            margin: 0,
-            fontSize: 13,
-            lineHeight: 1.5,
-            color: '#e5e5ea',
-            fontFamily: 'Inter, system-ui, sans-serif',
-          }}>
-            {comment}
-          </p>
         </div>
       </div>
       </div>
