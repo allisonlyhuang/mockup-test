@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { LinkedInLogoIcon, InstagramLogoIcon, SunIcon } from "@radix-ui/react-icons"
 import topLogo from '../assets/top_logo.svg';
 
@@ -221,10 +222,8 @@ export default function Sidebar({ lenis }) {
 
       {/* Apply tab — pinned to bottom of sidebar */}
       <div style={styles.divider} />
-      <a
-        href="https://linktr.ee/mockup.uci"
-        target="_blank"
-        rel="noopener noreferrer"
+      <Link
+        to="/apply"
         style={styles.applyTab}
         onMouseEnter={e => {
           e.currentTarget.style.background = 'rgba(13,154,255,0.12)';
@@ -234,8 +233,8 @@ export default function Sidebar({ lenis }) {
           e.currentTarget.style.background = 'transparent';
           e.currentTarget.style.color = '#555';
         }}
-      > Apply F26
-      </a>
+      >Apply F26
+      </Link>
 
     </nav>
   );

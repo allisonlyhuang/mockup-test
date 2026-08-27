@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -12,11 +13,31 @@ import Mission from './pages/Mission';
 import Values from './pages/Values';
 import Projects from './pages/Projects';
 import BuildWithUs from './pages/BuildWithUs';
+import Apply from './pages/Apply';
+import PageTransition from './components/PageTransition';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
+function MainSite({ lenis }) {
+  return (
+    <div style={styles.root}>
+      <div style={styles.notification}>
+        <Notification />
+      </div>
+      <Sidebar lenis={lenis} />
+      <main style={styles.main}>
+        <Hero />
+        <AboutUs />
+        <Mission />
+        <Values />
+        <Projects />
+        <BuildWithUs />
+      </main>
+    </div>
+  );
+}
+
 export default function App() {
-  const containerRef = useRef(null);
   const [lenis, setLenis] = useState(null);
 
   useEffect(() => {
@@ -40,21 +61,13 @@ export default function App() {
     };
   }, []);
 
+  const location = useLocation();
+
   return (
-    <div ref={containerRef} style={styles.root}>
-      <div style={styles.notification}>
-        <Notification />
-      </div>
-      <Sidebar lenis={lenis} />
-      <main style={styles.main}>
-        <Hero />
-        <AboutUs />
-        <Mission />
-        <Values />
-        <Projects />
-        <BuildWithUs />
-      </main>
-    </div>
+    <Routes location={location} key={location.pathname}>
+      <Route path="/" element={<PageTransition><MainSite lenis={lenis} /></PageTransition>} />
+      <Route path="/apply" element={<PageTransition><Apply /></PageTransition>} />
+    </Routes>
   );
 }
 
