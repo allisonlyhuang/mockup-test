@@ -15,8 +15,19 @@ import Projects from './pages/Projects';
 import BuildWithUs from './pages/BuildWithUs';
 import Apply from './pages/Apply';
 import PageTransition from './components/PageTransition';
+import UnsupportedScreen from './components/UnsupportedScreen';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+function useIsNarrow(breakpoint = 1400) {
+  const [narrow, setNarrow] = useState(() => window.innerWidth < breakpoint);
+  useEffect(() => {
+    const handler = () => setNarrow(window.innerWidth < breakpoint);
+    window.addEventListener('resize', handler, { passive: true });
+    return () => window.removeEventListener('resize', handler);
+  }, [breakpoint]);
+  return narrow;
+}
 
 function MainSite({ lenisRef }) {
   return (
@@ -80,6 +91,10 @@ export default function App() {
       setLenis(null);
     };
   }, [location.pathname]);
+
+  const narrow = useIsNarrow();
+
+  if (narrow) return <UnsupportedScreen />;
 
   return (
     <>
