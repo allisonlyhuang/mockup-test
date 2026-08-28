@@ -19,12 +19,8 @@ import PageTransition from './components/PageTransition';
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 function MainSite({ lenisRef }) {
-  const navigate = useNavigate();
   return (
     <div style={styles.root}>
-      <div style={styles.notification}>
-        <Notification onApply={() => { lenisRef.current?.destroy(); navigate('/apply'); }} />
-      </div>
       <Sidebar lenis={lenisRef.current} />
       <main style={styles.main}>
         <Hero />
@@ -34,6 +30,17 @@ function MainSite({ lenisRef }) {
         <Projects />
         <BuildWithUs />
       </main>
+    </div>
+  );
+}
+
+function GlobalNotification({ lenisRef }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+  if (location.pathname !== '/') return null;
+  return (
+    <div style={styles.notification}>
+      <Notification onApply={() => { lenisRef.current?.destroy(); navigate('/apply'); }} />
     </div>
   );
 }
@@ -75,10 +82,13 @@ export default function App() {
   }, [location.pathname]);
 
   return (
-    <Routes location={location} key={location.pathname}>
-      <Route path="/" element={<PageTransition><MainSite lenisRef={lenisRef} /></PageTransition>} />
-      <Route path="/apply" element={<PageTransition><Apply /></PageTransition>} />
-    </Routes>
+    <>
+      <GlobalNotification lenisRef={lenisRef} />
+      <Routes location={location} key={location.pathname}>
+        <Route path="/" element={<PageTransition><MainSite lenisRef={lenisRef} /></PageTransition>} />
+        <Route path="/apply" element={<PageTransition><Apply /></PageTransition>} />
+      </Routes>
+    </>
   );
 }
 
