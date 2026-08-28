@@ -78,12 +78,13 @@ export default function Hero() {
 
         </div>
 
-        {/* Right side */}
-        <div className="hero-right">
-          <RobloxPosts />
-        </div>
         </div>
         {/* end hero-main-row */}
+
+        {/* Posts — absolutely positioned, no layout impact */}
+        <div className="hero-posts">
+          <RobloxPosts />
+        </div>
 
         {/* Body text */}
         <p className="hero-body">
