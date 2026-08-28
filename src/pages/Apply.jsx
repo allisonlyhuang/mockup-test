@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Check, Loader2, X, Square, ChevronDown } from "lucide-react";
+import { Check, Loader2, X, SquareChevronDown, ChevronDown } from "lucide-react";
 import FaceWithEyes from "../components/FaceWithEyes";
 import FigmaTimeline from "../components/FigmaTimeline";
 import templateBg from "../assets/template.jpg";
@@ -117,14 +117,8 @@ export default function Apply() {
               <div style={{ ...s.fieldGroup, flex: 1 }}>
                 <label style={s.label}>Year <span style={s.asterisk}>*</span></label>
                 <div style={s.figmaSelect}>
-                  <Square
-                    size={28}
-                    strokeWidth={1}
-                    color="#e0e0e0"
-                    style={s.selectIcon}
-                  />
                   <select
-                    style={s.select}
+                    style={{ ...s.select, color: quarter ? '#1a1a1a' : '#aaa' }}
                     value={quarter}
                     onChange={(e) => setQuarter(e.target.value)}
                     required
@@ -143,14 +137,8 @@ export default function Apply() {
               <div style={{ ...s.fieldGroup, flex: 1 }}>
                 <label style={s.label}>Role Interest <span style={s.asterisk}>*</span></label>
                 <div style={s.figmaSelect}>
-                  <Square
-                    size={28}
-                    strokeWidth={1}
-                    color="#e0e0e0"
-                    style={s.selectIcon}
-                  />
                   <select
-                    style={s.select}
+                    style={{ ...s.select, color: role ? '#1a1a1a' : '#aaa' }}
                     value={role}
                     onChange={(e) => setRole(e.target.value)}
                     required
@@ -496,6 +484,7 @@ const s = {
     border: "1px solid #e0e0e0",
     borderRadius: 8,
     overflow: "hidden",
+    paddingLeft: '10px'
   },
   selectIcon: {
     flexShrink: 0,
