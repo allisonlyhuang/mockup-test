@@ -62,7 +62,7 @@
 .hero-posts {
   position: absolute;
   top: 40%;
-  right: clamp(4rem, 11vw, 12rem);
+  right: clamp(2rem, 7vw, 8rem);
   transform: translateY(-50%);
   pointer-events: auto;
 }

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Check, Loader2, X, SquareChevronDown, ChevronDown } from "lucide-react";
 import FaceWithEyes from "../components/FaceWithEyes";
@@ -7,6 +7,9 @@ import templateBg from "../assets/template.jpg";
 
 export default function Apply() {
   const navigate = useNavigate();
+
+  useEffect(() => { window.scrollTo(0, 0); }, []);
+
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [takeHome, setTakeHome] = useState("");
