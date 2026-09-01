@@ -5,7 +5,7 @@ import FaceWithEyes from "../components/FaceWithEyes";
 import FigmaTimeline from "../components/FigmaTimeline";
 import templateBg from "../assets/template.jpg";
 
-const SHEET_ENDPOINT = import.meta.env.VITE_SHEET_ENDPOINT;
+const SUBMIT_URL = "/api/submit";
 
 export default function Apply() {
   const navigate = useNavigate();
@@ -46,13 +46,12 @@ export default function Apply() {
     };
 
     try {
-      await fetch(SHEET_ENDPOINT, {
+      const res = await fetch(SUBMIT_URL, {
         method: "POST",
-        mode: "no-cors",
-        redirect: "follow",
-        headers: { "Content-Type": "text/plain" },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(payload),
       });
+      if (!res.ok) throw new Error("Server error");
 
       setStatus("sent");
       setTimeout(() => {
