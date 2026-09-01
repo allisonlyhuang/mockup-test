@@ -5,6 +5,8 @@ import FaceWithEyes from "../components/FaceWithEyes";
 import FigmaTimeline from "../components/FigmaTimeline";
 import templateBg from "../assets/template.jpg";
 
+const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbymVD6UldhtJrPhUe6tX31usjcPY80VHX-czAseBaPsoCPij-vL8BuIwOMu1mRxXcQZ/exec";
+
 export default function Apply() {
   const navigate = useNavigate();
 
@@ -21,12 +23,37 @@ export default function Apply() {
   const [prevQuarter, setPrevQuarter] = useState('');
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState("idle");
+  const [submitError, setSubmitError] = useState(null);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (status !== "idle") return;
     setStatus("sending");
-    setTimeout(() => {
+    setSubmitError(null);
+
+    const payload = {
+      timestamp:    new Date().toISOString(),
+      fullName:     name,
+      uciEmail:     email,
+      year:         quarter,
+      roleInterest: role,
+      takeHomeURL:  takeHome,
+      whyJoin:      about,
+      portfolioURL: portfolio || null,
+      projectTeams: confirmed ? "Yes" : "No",
+      prevRole:     confirmed ? prevRole : "",
+      prevQuarter:  confirmed ? prevQuarter : "",
+    };
+
+    try {
+      const res = await fetch(SHEET_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "text/plain" },
+        body: JSON.stringify(payload),
+      });
+      const json = await res.json();
+      if (json.result !== "success") throw new Error(json.error || "Unknown error");
+
       setStatus("sent");
       setTimeout(() => {
         setName("");
@@ -36,10 +63,16 @@ export default function Apply() {
         setAbout("");
         setRole("");
         setQuarter("");
+        setPrevRole("");
+        setPrevQuarter("");
         setConfirmed(false);
         setStatus("idle");
       }, 1800);
-    }, 1000);
+    } catch (err) {
+      console.error("Submission error:", err);
+      setSubmitError("Something went wrong. Please try again.");
+      setStatus("idle");
+    }
   };
 
   return (
@@ -266,6 +299,9 @@ export default function Apply() {
 
           {/* Footer */}
           <div style={s.footer}>
+            {submitError && (
+              <span style={s.errorText}>{submitError}</span>
+            )}
             <div style={s.footerActions}>
               <button
                 type="button"
@@ -572,8 +608,12 @@ const s = {
   footer: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "flex-end",
+    justifyContent: "space-between",
     padding: "12px 20px 16px",
+  },
+  errorText: {
+    fontSize: 12,
+    color: "#e53e3e",
   },
   footerActions: {
     display: "flex",
