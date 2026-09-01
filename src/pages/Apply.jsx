@@ -5,7 +5,7 @@ import FaceWithEyes from "../components/FaceWithEyes";
 import FigmaTimeline from "../components/FigmaTimeline";
 import templateBg from "../assets/template.jpg";
 
-const SHEET_ENDPOINT = "https://script.google.com/macros/s/AKfycbymVD6UldhtJrPhUe6tX31usjcPY80VHX-czAseBaPsoCPij-vL8BuIwOMu1mRxXcQZ/exec";
+const SHEET_ENDPOINT = import.meta.env.VITE_SHEET_ENDPOINT;
 
 export default function Apply() {
   const navigate = useNavigate();
@@ -46,13 +46,13 @@ export default function Apply() {
     };
 
     try {
-      const res = await fetch(SHEET_ENDPOINT, {
+      await fetch(SHEET_ENDPOINT, {
         method: "POST",
+        mode: "no-cors",
+        redirect: "follow",
         headers: { "Content-Type": "text/plain" },
         body: JSON.stringify(payload),
       });
-      const json = await res.json();
-      if (json.result !== "success") throw new Error(json.error || "Unknown error");
 
       setStatus("sent");
       setTimeout(() => {
