@@ -25,7 +25,7 @@ const STEPS = [
         <br></br>
         Please make a copy of{" "}
         <a
-          href="#"
+          href="https://www.figma.com/design/fEroag2r9U7IgqfjBrTLdf/-APPLICANT-NAME--Take-Home?node-id=0-1&t=OYut8ojfPJCGzBfi-1"
           style={{
             color: "#0D9AFF",
             textDecoration: "underline",
