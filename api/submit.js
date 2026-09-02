@@ -26,6 +26,7 @@ export default async function handler(req, res) {
 
   // Send confirmation email via Brevo SMTP
   const { uciEmail, fullName } = req.body ?? {};
+  console.log("Email block — uciEmail:", uciEmail, "BREVO_USER set:", !!process.env.BREVO_USER, "BREVO_PASS set:", !!process.env.BREVO_PASS);
   if (uciEmail && process.env.BREVO_USER && process.env.BREVO_PASS) {
     try {
       const transporter = nodemailer.createTransport({
@@ -38,14 +39,15 @@ export default async function handler(req, res) {
         },
       });
 
-      await transporter.sendMail({
+      const info = await transporter.sendMail({
         from: '"Design @ UCI Mockup" <' + process.env.BREVO_USER + '>',
         to: uciEmail,
         subject: "Your application has been received.",
         html: buildConfirmationEmail(fullName ?? "applicant"),
       });
+      console.log("Email sent:", info.messageId, info.response);
     } catch (emailErr) {
-      console.error("Email error:", emailErr);
+      console.error("Email error:", emailErr.message, emailErr.code);
     }
   }
 
