@@ -1,3 +1,4 @@
+import nodemailer from "nodemailer";
 import { buildConfirmationEmail } from "./emailTemplate.js";
 
 export default async function handler(req, res) {
@@ -23,27 +24,24 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Failed to submit" });
   }
 
-  // Send confirmation email via Brevo API
+  // Send confirmation email via Gmail SMTP
   const { uciEmail, fullName } = req.body ?? {};
-  if (uciEmail && process.env.BREVO_API_KEY) {
+  if (uciEmail && process.env.GMAIL_USER && process.env.GMAIL_APP_PASS) {
     try {
-      const emailRes = await fetch("https://api.brevo.com/v3/smtp/email", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "api-key": process.env.BREVO_API_KEY,
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.GMAIL_USER,
+          pass: process.env.GMAIL_APP_PASS,
         },
-        body: JSON.stringify({
-          sender: { name: "Design @ UCI Mockup", email: process.env.BREVO_SENDER },
-          to: [{ email: uciEmail, name: fullName ?? "Applicant" }],
-          subject: "Your application has been received.",
-          htmlContent: buildConfirmationEmail(fullName ?? "there"),
-        }),
       });
-      if (!emailRes.ok) {
-        const data = await emailRes.json();
-        console.error("Brevo error:", data);
-      }
+
+      await transporter.sendMail({
+        from: `"Design @ UCI Mockup" <${process.env.GMAIL_USER}>`,
+        to: uciEmail,
+        subject: "Your application has been received.",
+        html: buildConfirmationEmail(fullName ?? "there"),
+      });
     } catch (emailErr) {
       console.error("Email error:", emailErr.message);
     }
