@@ -1,6 +1,5 @@
-import { render } from "@react-email/render";
 import { Resend } from "resend";
-import { ProfessionalEmail } from "../src/components/ProfessionalEmail.jsx";
+import { buildConfirmationEmail } from "./emailTemplate.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -30,7 +29,7 @@ export default async function handler(req, res) {
   if (uciEmail && process.env.RESEND_API_KEY) {
     try {
       const resend = new Resend(process.env.RESEND_API_KEY);
-      const html = await render(ProfessionalEmail({ recipientName: fullName ?? "there" }));
+      const html = buildConfirmationEmail(fullName ?? "there");
 
       await resend.emails.send({
         from: "Design @ UCI Mockup <onboarding@resend.dev>",
