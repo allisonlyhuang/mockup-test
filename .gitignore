@@ -22,8 +22,11 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+.bob
 
 # Environment variables
 .env
 .env.local
 .env.*.local
+.vercel
+.env*

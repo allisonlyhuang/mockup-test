@@ -1,4 +1,3 @@
-import nodemailer from "nodemailer";
 import { buildConfirmationEmail } from "./emailTemplate.js";
 
 export default async function handler(req, res) {
@@ -24,30 +23,28 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: "Failed to submit" });
   }
 
-  // Send confirmation email via Brevo SMTP
+  // Send confirmation email via Brevo API
   const { uciEmail, fullName } = req.body ?? {};
-  console.log("Email block — uciEmail:", uciEmail, "BREVO_USER set:", !!process.env.BREVO_USER, "BREVO_PASS set:", !!process.env.BREVO_PASS);
-  if (uciEmail && process.env.BREVO_USER && process.env.BREVO_PASS) {
+  if (uciEmail && process.env.BREVO_API_KEY) {
     try {
-      const transporter = nodemailer.createTransport({
-        host: "smtp-relay.brevo.com",
-        port: 587,
-        secure: false,
-        auth: {
-          user: process.env.BREVO_USER,
-          pass: process.env.BREVO_PASS,
+      const emailRes = await fetch("https://api.brevo.com/v3/smtp/email", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "api-key": process.env.BREVO_API_KEY,
         },
+        body: JSON.stringify({
+          sender: { name: "Design @ UCI Mockup", email: process.env.BREVO_SENDER },
+          to: [{ email: uciEmail, name: fullName ?? "Applicant" }],
+          subject: "Your application has been received.",
+          htmlContent: buildConfirmationEmail(fullName ?? "there"),
+        }),
       });
-
-      const info = await transporter.sendMail({
-        from: '"Design @ UCI Mockup" <' + process.env.BREVO_USER + '>',
-        to: uciEmail,
-        subject: "Your application has been received.",
-        html: buildConfirmationEmail(fullName ?? "applicant"),
-      });
-      console.log("Email sent:", info.messageId, info.response);
+      const data = await emailRes.json();
+      if (!emailRes.ok) console.error("Brevo error:", data);
+      else console.log("Email sent:", data.messageId);
     } catch (emailErr) {
-      console.error("Email error:", emailErr.message, emailErr.code);
+      console.error("Email error:", emailErr.message);
     }
   }
 
