@@ -35,6 +35,7 @@ const STEPS = [
           }}
           target="_blank"
           rel="noopener noreferrer"
+          onClick={(e) => e.stopPropagation()}
         >
           this Figma design
         </a>{" "}
