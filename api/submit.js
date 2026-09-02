@@ -40,9 +40,10 @@ export default async function handler(req, res) {
           htmlContent: buildConfirmationEmail(fullName ?? "there"),
         }),
       });
-      const data = await emailRes.json();
-      if (!emailRes.ok) console.error("Brevo error:", data);
-      else console.log("Email sent:", data.messageId);
+      if (!emailRes.ok) {
+        const data = await emailRes.json();
+        console.error("Brevo error:", data);
+      }
     } catch (emailErr) {
       console.error("Email error:", emailErr.message);
     }
