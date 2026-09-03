@@ -37,7 +37,7 @@ export default async function handler(req, res) {
       });
 
       await transporter.sendMail({
-        from: `"Design @ UCI Mockup" <${process.env.GMAIL_USER}>`,
+        from: `"Design at UCI Mockup" <${process.env.GMAIL_USER}>`,
         to: uciEmail,
         subject: "Your application has been received.",
         html: buildConfirmationEmail(fullName ?? "there"),

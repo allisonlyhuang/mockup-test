@@ -52,12 +52,12 @@ const STEPS = [
   },
   {
     phase: "Oct. 4 (Sunday) - Oct. 9 (Friday)",
-    date: "Interview & Coffee Chat",
+    date: "Whiteboarding & Interview",
     detail: (
       <>
         Interview decisions will be released{" "}
         <strong>Saturday, October 3rd.</strong> Selected applicants will be
-        invited for a short whiteboarding session and casual coffee chat with
+        invited for a short whiteboarding session and casual interview with
         directors. This is a chance for us to get to know you and for you to
         learn more about the program.
         <strong>

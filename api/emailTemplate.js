@@ -8,7 +8,7 @@ export function buildConfirmationEmail(name = "applicant") {
 <body style="background:#f4f4f5;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;margin:0;padding:32px 0">
   <div style="background:#ffffff;max-width:560px;margin:0 auto;border-radius:8px;border:1px solid #e4e4e7;overflow:hidden">
     <div style="padding:32px 40px 0">
-      <img src="${LOGO}" width="111" height="41" alt="Design @ UCI" style="display:block"/>
+      <img src="${LOGO}" width="111" height="41" alt="Design at UCI" style="display:block"/>
     </div>
     <hr style="border:none;border-top:1px solid #e4e4e7;margin:24px 0 0"/>
     <div style="padding:32px 40px">
