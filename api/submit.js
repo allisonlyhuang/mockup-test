@@ -43,10 +43,10 @@ export default async function handler(req, res) {
 
       await transporter.sendMail(isInquiry
         ? {
-            from: `"Design at UCI Mockup" <${process.env.GMAIL_USER}>`,
+            from: `"Mockup Website" <${process.env.GMAIL_USER}>`,
             to: process.env.GMAIL_USER,
             replyTo: email,
-            subject: `New inquiry from ${name}`,
+            subject: `New inquiry from ${name} ${organization || ""}`,
             text: [
               `Name: ${name}`,
               `Email: ${email}`,
