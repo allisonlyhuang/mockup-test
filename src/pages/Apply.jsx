@@ -24,15 +24,24 @@ export default function Apply() {
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState("idle");
   const [submitError, setSubmitError] = useState(null);
+  const [showSubmitConfirmation, setShowSubmitConfirmation] = useState(false);
+  const [submissionChecks, setSubmissionChecks] = useState([false, false, false]);
   const resetTimerRef = useRef(null);
 
   useEffect(() => () => clearTimeout(resetTimerRef.current), []);
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (status !== "idle") return;
-    setStatus("sending");
     setSubmitError(null);
+    setSubmissionChecks([false, false, false]);
+    setShowSubmitConfirmation(true);
+  };
+
+  const submitApplication = async () => {
+    if (status !== "idle" || submissionChecks.some((checked) => !checked)) return;
+    setStatus("sending");
+    setShowSubmitConfirmation(false);
 
     const payload = {
       timestamp:    new Date().toISOString(),
@@ -341,6 +350,70 @@ export default function Apply() {
       <FigmaTimeline />
       </div>{/* end layout */}
 
+      {showSubmitConfirmation && (
+        <div
+          style={s.confirmationBackdrop}
+          role="presentation"
+          onMouseDown={(e) => {
+            if (e.target === e.currentTarget) {
+              setSubmissionChecks([false, false, false]);
+              setShowSubmitConfirmation(false);
+            }
+          }}
+        >
+          <div
+            style={s.confirmationDialog}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="confirmation-title"
+          >
+            <h2 id="confirmation-title" style={s.confirmationTitle}>Ready to submit?</h2>
+            <p style={s.confirmationText}>
+              Please confirm that your information, portfolio links, and Take-Home are ready to send.
+            </p>
+            <div style={s.confirmationChecks}>
+              {[
+                "The information I provided is accurate.",
+                "My Take-Home and portfolio links are accessible.",
+                "I understand the time commitment for this program.",
+              ].map((label, index) => (
+                <label style={s.confirmationCheck} key={label}>
+                  <input
+                    type="checkbox"
+                    checked={submissionChecks[index]}
+                    onChange={() => setSubmissionChecks((checks) => checks.map((checked, i) => i === index ? !checked : checked))}
+                  />
+                  <span>{label}</span>
+                </label>
+              ))}
+            </div>
+            <div style={s.confirmationActions}>
+              <button
+                type="button"
+                style={s.cancelBtn}
+                onClick={() => {
+                  setSubmissionChecks([false, false, false]);
+                  setShowSubmitConfirmation(false);
+                }}
+              >
+                Go back
+              </button>
+              <button
+                type="button"
+                style={{
+                  ...s.continueBtn,
+                  ...(!submissionChecks.every(Boolean) ? s.continueDisabled : {}),
+                }}
+                disabled={!submissionChecks.every(Boolean)}
+                onClick={submitApplication}
+              >
+                Confirm & Submit
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       <style>{`
         @keyframes spin { from{transform:rotate(0deg)} to{transform:rotate(360deg)} }
         input::placeholder,textarea::placeholder { color: #b0b0b0; }
@@ -646,6 +719,58 @@ const s = {
   },
   continueSent: {
     background: "#0D9AFF",
+  },
+  confirmationBackdrop: {
+    position: "fixed",
+    inset: 0,
+    zIndex: 10,
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+    padding: 24,
+    background: "rgba(0, 0, 0, 0.45)",
+  },
+  confirmationDialog: {
+    width: "min(100%, 420px)",
+    padding: "24px",
+    borderRadius: 14,
+    background: "#ffffff",
+    boxShadow: "0 20px 60px rgba(0, 0, 0, 0.25)",
+  },
+  confirmationTitle: {
+    margin: "0 0 8px",
+    fontSize: 22,
+    fontWeight: 700,
+    color: "#1a1a1a",
+  },
+  confirmationText: {
+    margin: "0 0 22px",
+    color: "#666",
+    fontSize: 14,
+    lineHeight: 1.5,
+  },
+  confirmationChecks: {
+    display: "grid",
+    gap: 12,
+    marginBottom: 24,
+  },
+  confirmationCheck: {
+    display: "flex",
+    alignItems: "flex-start",
+    gap: 9,
+    color: "#333",
+    fontSize: 13,
+    lineHeight: 1.4,
+    cursor: "pointer",
+  },
+  continueDisabled: {
+    cursor: "not-allowed",
+    opacity: 0.45,
+  },
+  confirmationActions: {
+    display: "flex",
+    justifyContent: "flex-end",
+    gap: 8,
   },
   btnContent: {
     display: "inline-flex",

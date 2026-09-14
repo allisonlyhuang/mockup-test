@@ -34,6 +34,16 @@ body {
   background-position: top left;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
+@supports not (scrollbar-gutter: stable) {
+  html {
+    overflow-y: scroll;
+  }
+}
+
 #root {
   width: 100%;
   min-height: 100svh;

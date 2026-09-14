@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   Send,
   MessagesSquare,
@@ -126,9 +126,30 @@ const BLUE_SOFT = "#93c5fd";
 
 export default function FigmaTimeline() {
   const [expanded, setExpanded] = useState(0);
+  const scrollPositionRef = useRef(null);
+
+  useEffect(() => {
+    if (scrollPositionRef.current === null) return;
+    const targetScrollY = scrollPositionRef.current;
+    let frameCount = 0;
+    let frameId;
+
+    const restoreScrollPosition = () => {
+      window.scrollTo(0, targetScrollY);
+      frameCount += 1;
+      if (frameCount < 12) {
+        frameId = requestAnimationFrame(restoreScrollPosition);
+      } else {
+        scrollPositionRef.current = null;
+      }
+    };
+
+    frameId = requestAnimationFrame(restoreScrollPosition);
+    return () => cancelAnimationFrame(frameId);
+  }, [expanded]);
 
   return (
-    <div style={t.root}>
+    <div style={{ ...t.root, overflowAnchor: "none" }}>
       {STEPS.map((step, i) => {
         const isOpen = expanded === i;
         return (
@@ -167,7 +188,10 @@ export default function FigmaTimeline() {
               )}
               <div
                 style={{ ...t.frame, ...(isOpen ? t.frameOpen : {}) }}
-                onClick={() => setExpanded(isOpen ? null : i)}
+                onClick={() => {
+                  scrollPositionRef.current = window.scrollY;
+                  setExpanded(isOpen ? null : i);
+                }}
               >
                 <div style={t.frameInner}>
                   <div style={t.titleRow}>
