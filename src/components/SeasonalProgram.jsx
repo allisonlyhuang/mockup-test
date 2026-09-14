@@ -68,7 +68,7 @@ export default function SeasonalProgram() {
           <p className="seasonal-program-eyebrow">Fall 2026 · MockUp x Roblox</p>
           <h2 id="seasonal-program-title">Design for what comes next.</h2>
           <p className="seasonal-program-description">
-            A seven-week UI/UX design program where UCI students work with real stakeholders
+            A nine-week UI/UX design program where UCI students work with real stakeholders
             to turn a meaningful problem into a polished product.
           </p>
           <Link to="/apply" className="seasonal-program-cta">
