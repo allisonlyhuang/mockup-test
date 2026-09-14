@@ -17,6 +17,7 @@ import Apply from './pages/Apply';
 import PageTransition from './components/PageTransition';
 import UnsupportedScreen from './components/UnsupportedScreen';
 import Footer from './components/Footer';
+import SeasonalProgram from './components/SeasonalProgram';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -36,6 +37,7 @@ function MainSite({ lenisRef }) {
       <Sidebar lenisRef={lenisRef} />
       <main style={styles.main}>
         <Hero />
+        <SeasonalProgram />
         <AboutUs />
         <Mission />
         <Values />

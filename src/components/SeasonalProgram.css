@@ -1,0 +1,326 @@
+.seasonal-program {
+  --seasonal-blue: #0877b8;
+  background: #000000;
+  color: #ffffff;
+  margin-bottom: clamp(5rem, 9vw, 10rem);
+  padding: clamp(2.5rem, 5vw, 4.5rem) clamp(2rem, 8vw, 7rem);
+}
+
+.seasonal-program-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  width: 100%;
+  max-width: 1120px;
+  margin: 0 auto;
+}
+
+.seasonal-program-copy {
+  max-width: 600px;
+}
+
+.seasonal-program-copy .seasonal-program-cta {
+  margin-top: 1.5rem;
+}
+
+.seasonal-program-image {
+  display: block;
+  width: clamp(260px, 31vw, 450px);
+  height: auto;
+  flex-shrink: 0;
+  object-fit: contain;
+}
+
+.seasonal-program-eyebrow {
+  margin: 0 0 0.8rem;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.seasonal-program h2 {
+  margin: 0 0 0.8rem;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  letter-spacing: -0.02em;
+}
+
+.seasonal-program-description {
+  max-width: 580px;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.seasonal-program-cta {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  gap: 0.7rem;
+  padding: 1rem 1.4rem;
+  border: 2px solid #ffffff;
+  border-radius: 999px;
+  background: #ffffff;
+  color: black;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+
+.seasonal-program-cta:hover,
+.seasonal-program-cta:focus-visible {
+  background: transparent;
+  color: #ffffff;
+  transform: translateY(-2px);
+}
+
+.seasonal-program-timeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1120px;
+  margin: 4rem auto 0;
+}
+
+.seasonal-program-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0.55rem;
+  right: 0;
+  left: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.35);
+}
+
+.seasonal-program-step {
+  position: relative;
+  z-index: 1;
+  min-width: 0;
+}
+
+.seasonal-program-step-number {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-bottom: 1.1rem;
+  border: 1px solid #ffffff;
+  border-radius: 50%;
+  background: #000000;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 8px;
+  font-weight: 700;
+}
+
+.seasonal-program-step h3 {
+  margin: 0 0 0.2rem;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.seasonal-program-step p.seasonal-program-step-date {
+  margin-bottom: 0.45rem !important;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+.seasonal-program-step p {
+  max-width: 180px;
+  margin: 0;
+  color: rgba(255, 255, 255, 0.7);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.seasonal-program-structure {
+  width: 100%;
+  max-width: 1120px;
+  margin: 4.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.seasonal-program-structure-eyebrow {
+  margin: 0 0 0.7rem;
+  color: rgba(255, 255, 255, 0.65);
+  font-family: var(--font-body);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.seasonal-program-structure h3 {
+  margin: 0 0 1.8rem;
+  color: #ffffff;
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.6rem);
+  line-height: 1;
+}
+
+.seasonal-program-structure-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.seasonal-program-structure-group {
+  min-height: 105px;
+  padding: 1.25rem;
+  background: #000000;
+}
+
+.seasonal-program-structure-group h4 {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.55rem;
+  color: #ffffff;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.seasonal-program-structure-group h4 svg {
+  flex-shrink: 0;
+  width: 15px;
+  height: 15px;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.seasonal-program-structure-group p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.seasonal-program-structure-group p a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.15s ease;
+}
+
+.seasonal-program-structure-group p a:hover,
+.seasonal-program-structure-group p a:focus-visible {
+  opacity: 0.7;
+}
+
+.seasonal-program-teams {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.6rem;
+}
+
+.seasonal-program-people {
+  display: grid;
+  gap: 0.6rem;
+}
+
+.seasonal-program-people--2-columns {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.seasonal-program-people--3-columns {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.seasonal-program-team-note {
+  margin: 0 0 0.9rem !important;
+  color: rgba(255, 255, 255, 0.82) !important;
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+}
+
+.seasonal-program-team {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.seasonal-program-team strong {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.seasonal-program-person {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  color: rgba(255, 255, 255, 0.68);
+  font-family: var(--font-body);
+  font-size: 11px;
+  line-height: 1.35;
+}
+
+.seasonal-program-person strong {
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.seasonal-program-person a {
+  color: #ffffff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 700px) {
+  .seasonal-program-inner {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .seasonal-program-image {
+    width: min(450px, 80vw);
+    order: 3;
+  }
+
+  .seasonal-program-timeline {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem 1.25rem;
+    margin-top: 3rem;
+  }
+
+  .seasonal-program-timeline::before {
+    display: none;
+  }
+
+  .seasonal-program-structure {
+    margin-top: 3rem;
+  }
+
+  .seasonal-program-structure-grid,
+  .seasonal-program-teams,
+  .seasonal-program-people--2-columns,
+  .seasonal-program-people--3-columns {
+    grid-template-columns: 1fr;
+  }
+}
