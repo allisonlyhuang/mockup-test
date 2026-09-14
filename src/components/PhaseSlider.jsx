@@ -179,7 +179,9 @@ function DoodleFrame({ svg, active, size }) {
   const activeRef = useRef(active);
   const { markup, ratio } = useMemo(() => prepSvgMarkup(svg), [svg]);
 
-  activeRef.current = active;
+  useLayoutEffect(() => {
+    activeRef.current = active;
+  }, [active]);
 
   // Inject SVG markup imperatively so the ref div is always mounted
   // before we try to query its children.
