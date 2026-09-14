@@ -128,7 +128,7 @@ export default function SeasonalProgram() {
           </div>
 
           <div className="seasonal-program-structure-group">
-            <h4><GlobeIcon aria-hidden="true" /> Roblox Stakeholders · 3</h4>
+            <h4><GlobeIcon aria-hidden="true" /> Roblox Stakeholders</h4>
             <p className="seasonal-program-team-note">Bringing real-world context and project feedback.</p>
             <PeopleList people={STAKEHOLDERS} columns={3} />
           </div>
