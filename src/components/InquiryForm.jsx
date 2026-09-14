@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Building2, Search, PencilLine, Check, Loader2, Mail } from "lucide-react";
 
 
@@ -15,6 +15,8 @@ const INITIAL_SELECTIONS = OPTIONS.reduce((acc, o) => {
   return acc;
 }, {});
 
+const SUBMIT_URL = "/api/submit";
+
 export default function InquiryForm() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -29,17 +31,31 @@ export default function InquiryForm() {
     setSelections((prev) => ({ ...prev, [key]: !prev[key] }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (status !== "idle") return;
 
     setStatus("sending");
 
-    // simulate processing
-    setTimeout(() => {
-      setStatus("sent");
+    try {
+      const response = await fetch(SUBMIT_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          type: "inquiry",
+          name,
+          email,
+          organization,
+          interests: OPTIONS
+            .filter((option) => selections[option.key])
+            .map((option) => option.label),
+          otherDetails: otherText,
+        }),
+      });
 
-      // clear form + reset button after showing "Sent!"
+      if (!response.ok) throw new Error("Inquiry submission failed");
+
+      setStatus("sent");
       setTimeout(() => {
         setName("");
         setEmail("");
@@ -48,7 +64,11 @@ export default function InquiryForm() {
         setSelections(INITIAL_SELECTIONS);
         setStatus("idle");
       }, 1100);
-    }, 1000);
+    } catch (error) {
+      console.error("Inquiry submission error:", error);
+      setStatus("idle");
+      alert("We couldn't send your inquiry. Please try again.");
+    }
   };
 
   return (
@@ -72,6 +92,7 @@ export default function InquiryForm() {
               style={styles.fieldInput}
               type="text"
               placeholder="Name"
+              required
               value={name}
               onChange={(e) => setName(e.target.value)}
               disabled={status !== "idle"}
@@ -84,6 +105,7 @@ export default function InquiryForm() {
               style={styles.fieldInput}
               type="email"
               placeholder="Email"
+              required
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               disabled={status !== "idle"}
