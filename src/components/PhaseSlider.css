@@ -16,7 +16,7 @@
   overflow-y: hidden;
   overscroll-behavior-x: contain;
   -webkit-overflow-scrolling: touch;
-  touch-action: pan-x;
+  touch-action: auto;
   cursor: default;
   padding: 0 0 16px clamp(2rem, 8vw, 7rem);
   width: 100%;

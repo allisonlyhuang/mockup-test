@@ -189,21 +189,16 @@ export default function PhaseSlider({ phases, frame, className = "" }) {
 
   const onWheel = useCallback((e) => {
     const strip = stripRef.current;
-    if (!strip) return;
+    if (!strip || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
     e.preventDefault();
-    strip.scrollLeft += e.deltaY + e.deltaX;
-  }, []);
-
-  const onTouchMove = useCallback((e) => {
-    e.preventDefault();
+    strip.scrollLeft += e.deltaX;
   }, []);
 
   const setCarouselRef = useCallback((node) => {
     sectionRef.current = node;
     if (!node) return;
     node.addEventListener("wheel", onWheel, { passive: false });
-    node.addEventListener("touchmove", onTouchMove, { passive: false });
-  }, [onWheel, onTouchMove]);
+  }, [onWheel]);
 
   useEffect(() => {
     if (!stripEl) return;
@@ -223,9 +218,8 @@ export default function PhaseSlider({ phases, frame, className = "" }) {
     return () => {
       if (!node) return;
       node.removeEventListener("wheel", onWheel);
-      node.removeEventListener("touchmove", onTouchMove);
     };
-  }, [onWheel, onTouchMove]);
+  }, [onWheel]);
 
   const setRefs = useCallback((node) => {
     stripRef.current = node;
