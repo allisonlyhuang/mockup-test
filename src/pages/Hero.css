@@ -101,7 +101,7 @@
 
 /* Shared text style for "m" and "ckup" */
 .hero-letter {
-  font-family: 'Fustat', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(80px, 20vw, 309px);
   font-weight: 800;
   color: #000000;
@@ -184,7 +184,7 @@
 .hero-welcome {
   margin: 0 0 -0.5em 0.1em;
   color: var(--Black-8, rgba(0, 0, 0, 0.80));
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-body);
   font-size: 32px;
   font-style: normal;
   font-weight: 400;
@@ -196,11 +196,11 @@
 
 /* ── "by design at uci" ── */
 .hero-subtitle {
-  font-family: 'Fustat', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: 67.931px;
   font-style: normal;
   font-weight: 800;
-  color: #0D9AFF;
+  color: var(--accent-blue);
   letter-spacing: 1.359px;
   line-height: normal;
   margin: clamp(-1rem, -2vw, 0.5rem) 0 0;
@@ -239,7 +239,7 @@
 }
 
 .hero-body {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   font-weight: 400;
   color: #1a1a1a;
@@ -280,7 +280,7 @@
 .hero-apply-link {
   position: relative;
   z-index: 1;
-  color: #0D9AFF;
+  color: var(--accent-blue);
   text-decoration: underline;
   text-underline-offset: 3px;
   font-weight: 500;

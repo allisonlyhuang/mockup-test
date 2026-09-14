@@ -82,19 +82,28 @@ function Tooltip({ text, visible }) {
   );
 }
 
-// ── Nav item with tooltip ─────────────────────────────────────────────────────
-function NavItem({ label, id, isActive, onClick }) {
-  const [hovered, setHovered]       = useState(false);
+function useTooltip() {
+  const [hovered, setHovered] = useState(false);
   const [tooltipVisible, setTooltip] = useState(false);
-  const timerRef                     = useRef(null);
+  const timerRef = useRef(null);
+
+  useEffect(() => () => clearTimeout(timerRef.current), []);
 
   const showTooltip = () => {
     timerRef.current = setTimeout(() => setTooltip(true), 600);
   };
+
   const hideTooltip = () => {
     clearTimeout(timerRef.current);
     setTooltip(false);
   };
+
+  return { hovered, setHovered, tooltipVisible, showTooltip, hideTooltip };
+}
+
+// ── Nav item with tooltip ─────────────────────────────────────────────────────
+function NavItem({ label, id, isActive, onClick }) {
+  const { hovered, setHovered, tooltipVisible, showTooltip, hideTooltip } = useTooltip();
 
   return (
     <li style={{ display: 'flex', position: 'relative' }}>
@@ -135,7 +144,7 @@ function NavItem({ label, id, isActive, onClick }) {
 }
 
 // ── Sidebar ───────────────────────────────────────────────────────────────────
-export default function Sidebar({ lenis }) {
+export default function Sidebar({ lenisRef }) {
   const [active, setActive] = useState('hero');
 
   useEffect(() => {
@@ -157,6 +166,7 @@ export default function Sidebar({ lenis }) {
   const scrollTo = (id) => {
     const el = document.getElementById(id);
     if (!el) return;
+    const lenis = lenisRef?.current;
     if (lenis) {
       lenis.scrollTo(el, { offset: 0, duration: 1.2 });
     } else {
@@ -229,9 +239,7 @@ export default function Sidebar({ lenis }) {
 
 // ── Layer item (social link) ──────────────────────────────────────────────────
 function LayerItem({ label, tooltip, href, icon }) {
-  const [hovered, setHovered]        = useState(false);
-  const [tooltipVisible, setTooltip] = useState(false);
-  const timerRef                     = useRef(null);
+  const { hovered, setHovered, tooltipVisible, showTooltip, hideTooltip } = useTooltip();
   const LinkComponent                = href.startsWith('/') ? Link : 'a';
   const linkProps                    = href.startsWith('/')
     ? { to: href }
@@ -243,12 +251,11 @@ function LayerItem({ label, tooltip, href, icon }) {
         {...linkProps}
         onMouseEnter={() => {
           setHovered(true);
-          timerRef.current = setTimeout(() => setTooltip(true), 600);
+          showTooltip();
         }}
         onMouseLeave={() => {
           setHovered(false);
-          clearTimeout(timerRef.current);
-          setTooltip(false);
+          hideTooltip();
         }}
         style={{
           display: 'flex',

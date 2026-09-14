@@ -1,0 +1,133 @@
+.phase-carousel {
+  --pc-accent: var(--accent-blue);
+  --pc-ink: #0b0b0c;
+  --pc-body: #4a4d52;
+  --pc-bg: #ffffff;
+  --pc-card-width: 560px;
+  --pc-gap: 24px;
+  width: 100%;
+}
+
+.phase-carousel__strip {
+  display: flex;
+  flex-direction: row;
+  gap: var(--pc-gap);
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-x;
+  cursor: default;
+  padding: 0 0 16px clamp(2rem, 8vw, 7rem);
+  width: 100%;
+  box-sizing: border-box;
+  scrollbar-width: none;
+}
+
+.phase-carousel__strip::-webkit-scrollbar { display: none; }
+
+.phase-carousel__scroll-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 clamp(2rem, 8vw, 7rem);
+  padding-top: 2px;
+  color: #777;
+  font-family: var(--font-body);
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.phase-carousel__scroll-track {
+  position: relative;
+  flex: 1;
+  height: 3px;
+  overflow: hidden;
+  background: #d9d9d9;
+}
+
+.phase-carousel__scroll-thumb {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 22%;
+  background: var(--pc-accent);
+  transition: left 0.12s ease-out;
+}
+
+.phase-carousel__slide {
+  flex: 0 0 var(--pc-card-width);
+  box-sizing: border-box;
+}
+
+.phase-card {
+  position: relative;
+  background: var(--pc-bg);
+  max-width: var(--pc-card-max-width);
+  margin: 0 auto;
+  aspect-ratio: 781 / 371;
+  padding: 28px 32px;
+  display: flex;
+  box-sizing: border-box;
+}
+
+.phase-card__text {
+  position: absolute;
+  z-index: 1;
+  max-width: 52%;
+}
+
+.phase-card--bl .phase-card__text { bottom: 28px; left: 32px; }
+.phase-card--tr .phase-card__text { top: 28px; right: 32px; text-align: right; }
+.phase-card--br .phase-card__text { bottom: 28px; right: 32px; text-align: right; }
+.phase-card--tl .phase-card__text { top: 28px; left: 32px; }
+
+.phase-card__doodle {
+  position: absolute;
+  height: 55%;
+  width: auto;
+  pointer-events: none;
+}
+
+.phase-card--bl .phase-card__doodle { top: 27px; right: 40px; }
+.phase-card--tr .phase-card__doodle { bottom: 40px; left: 50px; }
+.phase-card--br .phase-card__doodle { top: 24px; left: 70px; }
+.phase-card--tl .phase-card__doodle { bottom: 24px; right: 28px; }
+
+.phase-card__doodle svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.phase-card__eyebrow {
+  margin: 0 0 6px;
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--pc-ink);
+}
+
+.phase-card__subtitle {
+  margin: 0 0 10px;
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: clamp(20px, 3.4vw, 28px);
+  font-weight: 800;
+  color: var(--pc-ink);
+  line-height: 1.15;
+}
+
+.phase-card__body {
+  margin: 0;
+  font-family: -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--pc-body);
+}
+
+@media (max-width: 560px) {
+  .phase-carousel { --pc-card-width: 85vw; }
+}

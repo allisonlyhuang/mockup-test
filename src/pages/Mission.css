@@ -49,7 +49,7 @@
 }
 
 .mission-body {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-body);
   font-size: clamp(15px, 1.6vw, 18px);
   font-weight: 400;
   color: #1a1a1a;
@@ -62,7 +62,7 @@
 
 .mission-highlight {
   background: #cce8ff;
-  color: #0D9AFF;
+  color: var(--accent-blue);
   border-radius: 4px;
   padding: 1px 6px;
   font-weight: 500;

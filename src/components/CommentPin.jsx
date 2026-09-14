@@ -59,7 +59,7 @@ export default function CommentPin({
     });
 
     return () => st.kill();
-  }, []);
+  }, [entranceDelay]);
 
   useEffect(() => {
     const shape = shapeRef.current;

@@ -15,7 +15,7 @@
 }
 
 .projects-subtitle {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   font-weight: 400;
   color: #1a1a1a;

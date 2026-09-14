@@ -87,7 +87,6 @@ export default function Hero() {
         </div>
 
         </div>
-        {/* end hero-main-row */}
 
         {/* Posts — absolutely positioned, no layout impact */}
         <div className="hero-posts">

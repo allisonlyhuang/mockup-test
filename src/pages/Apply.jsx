@@ -1,6 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { Check, Loader2, X, SquareChevronDown, ChevronDown } from "lucide-react";
+import { Check, Loader2, ChevronDown } from "lucide-react";
 import FaceWithEyes from "../components/FaceWithEyes";
 import FigmaTimeline from "../components/FigmaTimeline";
 import templateBg from "../assets/template.jpg";
@@ -24,6 +24,9 @@ export default function Apply() {
   const [confirmed, setConfirmed] = useState(false);
   const [status, setStatus] = useState("idle");
   const [submitError, setSubmitError] = useState(null);
+  const resetTimerRef = useRef(null);
+
+  useEffect(() => () => clearTimeout(resetTimerRef.current), []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -54,7 +57,7 @@ export default function Apply() {
       if (!res.ok) throw new Error("Server error");
 
       setStatus("sent");
-      setTimeout(() => {
+      resetTimerRef.current = setTimeout(() => {
         setName("");
         setEmail("");
         setTakeHome("");

@@ -23,7 +23,7 @@
 .site-footer-description {
   max-width: 270px;
   margin: 0;
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-body);
   font-size: 13px;
   line-height: 1.5;
 }

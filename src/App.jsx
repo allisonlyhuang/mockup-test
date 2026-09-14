@@ -33,7 +33,7 @@ function useIsNarrow(breakpoint = 1400) {
 function MainSite({ lenisRef }) {
   return (
     <div style={styles.root}>
-      <Sidebar lenis={lenisRef.current} />
+      <Sidebar lenisRef={lenisRef} />
       <main style={styles.main}>
         <Hero />
         <AboutUs />
@@ -60,7 +60,6 @@ function GlobalNotification({ lenisRef }) {
 
 export default function App() {
   const lenisRef = useRef(null);
-  const [lenis, setLenis] = useState(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -68,7 +67,6 @@ export default function App() {
       if (lenisRef.current) {
         lenisRef.current.destroy();
         lenisRef.current = null;
-        setLenis(null);
       }
       return;
     }
@@ -84,13 +82,11 @@ export default function App() {
     gsap.ticker.add(rafCb);
     gsap.ticker.lagSmoothing(0);
     lenisRef.current = lenisInstance;
-    setLenis(lenisInstance);
 
     return () => {
       lenisInstance.destroy();
       gsap.ticker.remove(rafCb);
       lenisRef.current = null;
-      setLenis(null);
     };
   }, [location.pathname]);
 

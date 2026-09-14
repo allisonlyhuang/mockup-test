@@ -1,5 +1,6 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Building2, Search, PencilLine, Check, Loader2, Mail } from "lucide-react";
+import "./InquiryForm.css";
 
 
 const OPTIONS = [
@@ -25,6 +26,9 @@ export default function InquiryForm() {
   const [selections, setSelections] = useState(INITIAL_SELECTIONS);
   // status: "idle" | "sending" | "sent"
   const [status, setStatus] = useState("idle");
+  const resetTimerRef = useRef(null);
+
+  useEffect(() => () => clearTimeout(resetTimerRef.current), []);
 
   const toggle = (key) => {
     if (status !== "idle") return;
@@ -56,7 +60,7 @@ export default function InquiryForm() {
       if (!response.ok) throw new Error("Inquiry submission failed");
 
       setStatus("sent");
-      setTimeout(() => {
+      resetTimerRef.current = setTimeout(() => {
         setName("");
         setEmail("");
         setOrganization("");
@@ -111,6 +115,7 @@ export default function InquiryForm() {
               disabled={status !== "idle"}
             />
           </label>
+
           <label style={styles.fieldRow}>
             <Building2 size={18} color="#c7c7cc" strokeWidth={1.75} />
             <input
@@ -132,12 +137,19 @@ export default function InquiryForm() {
 
           {OPTIONS.map((opt) => (
             <div key={opt.key}>
-              <div
+              <label
                 style={styles.optionRow}
-                onClick={() => toggle(opt.key)}
               >
+                <input
+                  type="checkbox"
+                  checked={selections[opt.key]}
+                  onChange={() => toggle(opt.key)}
+                  disabled={status !== "idle"}
+                  style={styles.checkboxInput}
+                />
                 <span style={styles.optionLabel}>{opt.label}</span>
                 <span
+                  aria-hidden="true"
                   style={{
                     ...styles.checkbox,
                     ...(selections[opt.key] ? styles.checkboxChecked : {}),
@@ -147,7 +159,7 @@ export default function InquiryForm() {
                     <Check size={14} color="#ffffff" strokeWidth={3} />
                   )}
                 </span>
-              </div>
+              </label>
               {opt.key === "other" && selections.other && (
                 <div onClick={(e) => e.stopPropagation()}>
                   <textarea
@@ -285,6 +297,11 @@ const styles = {
     cursor: "pointer",
     userSelect: "none",
   },
+  checkboxInput: {
+    position: "absolute",
+    opacity: 0,
+    pointerEvents: "none",
+  },
   optionLabel: {
     color: "#ffffff",
     fontSize: 15,
@@ -345,7 +362,7 @@ const styles = {
     transition: "background 0.2s ease",
   },
   buttonSent: {
-    animation: "popIn 0.3s ease",
+    animation: "inquiry-form-pop-in 0.3s ease",
   },
   buttonContent: {
     display: "inline-flex",
@@ -354,6 +371,6 @@ const styles = {
     gap: 8,
   },
   spinner: {
-    animation: "spin 0.8s linear infinite",
+    animation: "inquiry-form-spin 0.8s linear infinite",
   },
 };

@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import avisionImg from "../assets/aboutus/avision_labs.png";
 import rcbabImg from "../assets/aboutus/rcbab.png";
+import "./VerticalSlider.css";
 
 const ENTRIES = [
   {
@@ -115,6 +116,11 @@ export default function VerticalSlider() {
     return () => { el.removeEventListener("wheel", onWheel); clearTimeout(wheelTimeout.current); };
   }, [applyStyles, goTo]);
 
+  useEffect(() => () => {
+    snapTween.current?.kill();
+    clearTimeout(wheelTimeout.current);
+  }, []);
+
   // ── Drag ──────────────────────────────────────────────────────────────
   const onPointerDown = (e) => {
     isDragging.current  = true;
@@ -153,90 +159,10 @@ export default function VerticalSlider() {
     if (e.key === "ArrowUp")   { e.preventDefault(); goTo(activeIndex - 1); }
   };
 
-  useEffect(() => { applyStyles(0, true); }, []); // eslint-disable-line
+  useEffect(() => { applyStyles(0, true); }, [applyStyles]);
 
   return (
     <div className="vac-root">
-      <style>{`
-        .vac-root {
-          width: 100%;
-          min-height: 100vh;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          font-family: 'Inter', system-ui, sans-serif;
-          color: #1a1a1a;
-          padding: 8px 24px 40px;
-          box-sizing: border-box;
-        }
-        .vac-stage-wrap {
-          position: relative;
-          width: 100%;
-          max-width: 1100px;
-          display: flex;
-          align-items: stretch;
-        }
-        .vac-stage {
-          position: relative;
-          flex: 0 1 560px;
-          width: 560px;
-          max-width: 100%;
-          height: 520px;
-          overflow: visible;
-          cursor: grab;
-          touch-action: none;
-          user-select: none;
-          -webkit-user-select: none;
-        }
-        .vac-stage.dragging { cursor: grabbing; }
-        .vac-stage:focus-visible { outline: 2px solid #0D9AFF; outline-offset: 4px; }
-        .vac-track { position: absolute; inset: 0; }
-        .vac-card {
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 479px;
-          margin-top: -159px;
-          margin-left: -239px;
-          will-change: transform, filter, opacity;
-          pointer-events: none;
-        }
-        .vac-card-img-wrap {
-          width: 479px;
-          height: 319px;
-          border-radius: 6px;
-          overflow: hidden;
-          background: #ffffff;
-          box-shadow: 0 1px 2px rgba(0,0,0,0.06), 0 18px 40px -12px rgba(0,0,0,0.18);
-        }
-        .vac-card-img-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        .vac-card-text { margin-top: 20px; text-align: center; padding: 0 8px; }
-        .vac-card-title {
-          font-family: 'Fustat', system-ui, sans-serif;
-          font-weight: 800;
-          font-size: 22px;
-          letter-spacing: -0.02em;
-          margin: 0 0 0px;
-          color: #1a1a1a;
-        }
-        .vac-card-subtitle {
-          font-family: 'Inter', system-ui, sans-serif;
-          font-size: 12px;
-          letter-spacing: 0.04em;
-          color: #0D9AFF;
-          margin: 0 0 3px;
-          font-weight: 500;
-          text-transform: uppercase;
-        }
-        .vac-card-body {
-          font-family: 'Inter', system-ui, sans-serif;
-          font-size: 13.5px;
-          line-height: 1.6;
-          color: #6b7280;
-          margin: 0 auto;
-          max-width: 600px;
-        }
-      `}</style>
       <div className="vac-stage-wrap">
 
         {/* Card stage */}

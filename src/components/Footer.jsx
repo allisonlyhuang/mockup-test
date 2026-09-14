@@ -1,4 +1,5 @@
 import './Footer.css';
+import topLogo from '../assets/top_logo.svg';
 
 export default function Footer() {
   return (
@@ -6,7 +7,7 @@ export default function Footer() {
       <div className="site-footer-main">
         <div>
           <img
-            src="/top_logo.png"
+            src={topLogo}
             alt="mockup"
             className="site-footer-brand"
           />

@@ -30,10 +30,10 @@
 }
 
 .about-heading {
-  font-family: 'Fustat', system-ui, sans-serif;
+  font-family: var(--font-display);
   font-size: clamp(48px, 6vw, 72px);
   font-weight: 800;
-  color: #0D9AFF;
+  color: var(--accent-blue);
   margin: 0;
   line-height: 1;
   letter-spacing: -0.02em;
@@ -46,7 +46,7 @@
 }
 
 .about-para {
-  font-family: Inter, system-ui, sans-serif;
+  font-family: var(--font-body);
   font-size: 16px;
   font-weight: 400;
   color: #1a1a1a;
