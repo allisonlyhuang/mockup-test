@@ -2,6 +2,7 @@ import { useRef, useState, useEffect, useCallback } from "react";
 import gsap from "gsap";
 import avisionImg from "../assets/aboutus/avision_labs.png";
 import rcbabImg from "../assets/aboutus/rcbab.png";
+import comingSoonImg from "../assets/aboutus/coming_soon.png";
 import "./VerticalSlider.css";
 
 const ENTRIES = [
@@ -21,7 +22,7 @@ const ENTRIES = [
   },
   {
     seed: "roblox",
-    img: null,
+    img: comingSoonImg,
     title: "Roblox",
     subtitle: "Fall 2026",
     body: "",
@@ -191,7 +192,7 @@ export default function VerticalSlider() {
                 role="option"
                 aria-selected={i === activeIndex}
               >
-                <div className="vac-card-img-wrap">
+                <div className={`vac-card-img-wrap${entry.seed === "roblox" ? " vac-card-img-wrap--placeholder" : ""}`}>
                   {entry.img ? (
                     <img src={entry.img} alt={entry.title} draggable={false} />
                   ) : (
