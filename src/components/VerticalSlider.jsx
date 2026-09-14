@@ -178,8 +178,10 @@ export default function VerticalSlider() {
         }
         .vac-stage {
           position: relative;
-          flex: 1;
-          height: 820px;
+          flex: 0 1 560px;
+          width: 560px;
+          max-width: 100%;
+          height: 520px;
           overflow: visible;
           cursor: grab;
           touch-action: none;
