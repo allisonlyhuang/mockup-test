@@ -11,6 +11,8 @@ export default function AnimatedStickyStack() {
   const quickY = useRef(null);
 
   useEffect(() => {
+    let removeSceneHoverListeners = () => {};
+
     const ctx = gsap.context(() => {
       const back = backRef.current;
       const front = frontRef.current;
@@ -32,26 +34,49 @@ export default function AnimatedStickyStack() {
         .to(back, { autoAlpha: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out" }, 0.05)
         .to(front, { autoAlpha: 1, y: 0, scale: 1, duration: 0.9, ease: "power3.out" }, 0.25);
 
-      [{ el: back, float: floatBack }, { el: front, float: floatFront }].forEach(({ el, float }) => {
-        el.style.cursor = "pointer";
-        el.addEventListener("mouseenter", () => {
-          float.pause();
-          gsap.to(el, { scale: 1.03, filter: "drop-shadow(0 14px 18px rgba(13,154,255,0.35))", duration: 0.35, ease: "power2.out" });
-        });
-        el.addEventListener("mouseleave", () => {
-          gsap.to(el, {
-            scale: 1, filter: "drop-shadow(0 0px 0px rgba(13,154,255,0))", duration: 0.35, ease: "power2.out",
-            onComplete: () => float.resume(),
-          });
-        });
+      [back, front].forEach((el) => {
+        el.style.pointerEvents = "none";
       });
+
+      const handleSceneEnter = () => {
+        floatBack.pause();
+        floatFront.pause();
+        gsap.to([back, front], {
+          scale: 1.03,
+          filter: "drop-shadow(0 14px 18px rgba(13,154,255,0.35))",
+          duration: 0.35,
+          ease: "power2.out",
+        });
+      };
+      const handleSceneLeave = () => {
+        gsap.to([back, front], {
+          scale: 1,
+          filter: "drop-shadow(0 0px 0px rgba(13,154,255,0))",
+          duration: 0.35,
+          ease: "power2.out",
+          onComplete: () => {
+            floatBack.resume();
+            floatFront.resume();
+          },
+        });
+      };
+
+      sceneRef.current.addEventListener("mouseenter", handleSceneEnter);
+      sceneRef.current.addEventListener("mouseleave", handleSceneLeave);
+      removeSceneHoverListeners = () => {
+        sceneRef.current?.removeEventListener("mouseenter", handleSceneEnter);
+        sceneRef.current?.removeEventListener("mouseleave", handleSceneLeave);
+      };
 
       quickX.current = gsap.quickTo(sceneRef.current, "rotationY", { duration: 0.4, ease: "power3" });
       quickY.current = gsap.quickTo(sceneRef.current, "rotationX", { duration: 0.4, ease: "power3" });
       gsap.set(sceneRef.current, { transformPerspective: 900, transformStyle: "preserve-3d" });
     }, sceneRef);
 
-    return () => ctx.revert();
+    return () => {
+      removeSceneHoverListeners();
+      ctx.revert();
+    };
   }, []);
 
   const handleMouseMove = (e) => {

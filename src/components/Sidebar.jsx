@@ -29,7 +29,7 @@ const SOCIAL_ITEMS = [
 ];
 
 const NAV_ITEMS = [
-  { label: 'Hero',             id: 'hero' },
+  { label: 'Welcome',             id: 'hero' },
   { label: 'About Us',         id: 'about-us' },
   { label: 'Mission',          id: 'mission' },
   { label: 'Values',           id: 'values' },
