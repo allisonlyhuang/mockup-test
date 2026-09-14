@@ -29,7 +29,7 @@ export default function Mission() {
       </div>
 
       <CommentPin style={{ bottom: '5rem', left: '11rem' }} author="Queena Liu" comment="Mockup is a program I wish I had when I was starting out, so I’m really glad we have a program like this now to help students gain real-world experience and build confidence working professionally." entranceDelay={0} />
-      <CommentPin style={{ top: '10rem', left: '6rem' }} author="Evie Ngo" comment="Love this direction!" entranceDelay={0.12} />
+      <CommentPin style={{ top: '10rem', left: '6rem' }} author="Evie Ngo" comment="Every designer eventually steps from learning into doing. I wanted to bridge the gap and give students that final piece before they enter the professional world." entranceDelay={0.12} />
       <CommentPin style={{ top: '18rem', right: '24rem' }} author="Allison Huang" comment="I truly love the community at Design@UCI and am excited for an opportunity to give back to a club that has shown me so much love." entranceDelay={0.24} />
     </section>
   );
