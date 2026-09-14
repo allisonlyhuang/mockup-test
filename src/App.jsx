@@ -16,6 +16,7 @@ import BuildWithUs from './pages/BuildWithUs';
 import Apply from './pages/Apply';
 import PageTransition from './components/PageTransition';
 import UnsupportedScreen from './components/UnsupportedScreen';
+import Footer from './components/Footer';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -40,6 +41,7 @@ function MainSite({ lenisRef }) {
         <Values />
         <Projects />
         <BuildWithUs />
+        <Footer />
       </main>
     </div>
   );

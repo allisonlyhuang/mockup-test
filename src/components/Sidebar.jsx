@@ -1,45 +1,30 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { LinkedInLogoIcon, InstagramLogoIcon, SunIcon } from "@radix-ui/react-icons"
+import {
+  EnvelopeClosedIcon,
+  FileTextIcon,
+  InstagramLogoIcon,
+} from '@radix-ui/react-icons';
 import topLogo from '../assets/top_logo.svg';
 
 const SOCIAL_ITEMS = [
   {
     label: 'Instagram',
-    tooltip: '@mockup.uci',
-    href: 'https://instagram.com',
-    icon: (
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-        <rect x="1.5" y="1.5" width="9" height="9" rx="2.5" stroke="currentColor" strokeWidth="1.3" fill="none"/>
-        <circle cx="6" cy="6" r="2" stroke="currentColor" strokeWidth="1.3" fill="none"/>
-        <circle cx="9" cy="3" r="0.7" fill="currentColor"/>
-      </svg>
-    ),
-  },
-  {
-    label: 'LinkedIn',
-    tooltip: 'mockup at UCI',
-    href: 'https://linkedin.com',
-    icon: (
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-        <rect x="1" y="1" width="10" height="10" rx="1.8" stroke="currentColor" strokeWidth="1.3" fill="none"/>
-        <path d="M3.5 5.2V9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-        <circle cx="3.5" cy="3.5" r="0.7" fill="currentColor"/>
-        <path d="M5.5 9V6.8C5.5 5.9 6.8 5.7 6.8 6.8V9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-        <path d="M6.8 6.3V5.2" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round"/>
-      </svg>
-    ),
+    tooltip: '@mockup_dauci',
+    href: 'https://instagram.com/mockup_dauci',
+    icon: <InstagramLogoIcon width={12} height={12} />,
   },
   {
     label: 'Email',
-    tooltip: 'mockup@uci.edu',
-    href: 'mailto:mockup@uci.edu',
-    icon: (
-      <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-        <rect x="1" y="2.5" width="10" height="7" rx="1.2" stroke="currentColor" strokeWidth="1.3" fill="none"/>
-        <path d="M1.5 3.5L6 7L10.5 3.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" strokeLinejoin="round"/>
-      </svg>
-    ),
+    tooltip: 'design+mockup@uci.edu',
+    href: 'mailto:design+mockup@uci.edu',
+    icon: <EnvelopeClosedIcon width={12} height={12} />,
+  },
+  {
+    label: 'Apply',
+    tooltip: 'Apply to Mockup',
+    href: '/apply',
+    icon: <FileTextIcon width={12} height={12} />,
   },
 ];
 
@@ -222,8 +207,10 @@ export default function Sidebar({ lenis }) {
 
       {/* Apply tab — pinned to bottom of sidebar */}
       <div style={styles.divider} />
-      <Link
-        to="/apply"
+      <a
+        href="https://designatuci.com"
+        target="_blank"
+        rel="noopener noreferrer"
         style={styles.applyTab}
         onMouseEnter={e => {
           e.currentTarget.style.background = 'rgba(13,154,255,0.12)';
@@ -233,8 +220,8 @@ export default function Sidebar({ lenis }) {
           e.currentTarget.style.background = 'transparent';
           e.currentTarget.style.color = '#555';
         }}
-      >Apply F26
-      </Link>
+      >Design at UCI
+      </a>
 
     </nav>
   );
@@ -245,13 +232,15 @@ function LayerItem({ label, tooltip, href, icon }) {
   const [hovered, setHovered]        = useState(false);
   const [tooltipVisible, setTooltip] = useState(false);
   const timerRef                     = useRef(null);
+  const LinkComponent                = href.startsWith('/') ? Link : 'a';
+  const linkProps                    = href.startsWith('/')
+    ? { to: href }
+    : { href, target: '_blank', rel: 'noopener noreferrer' };
 
   return (
     <li style={{ display: 'flex', position: 'relative' }}>
-      <a
-        href={href}
-        target={href.startsWith('http') ? '_blank' : undefined}
-        rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+      <LinkComponent
+        {...linkProps}
         onMouseEnter={() => {
           setHovered(true);
           timerRef.current = setTimeout(() => setTooltip(true), 600);
@@ -284,7 +273,7 @@ function LayerItem({ label, tooltip, href, icon }) {
           {icon}
         </span>
         {label}
-      </a>
+      </LinkComponent>
       <Tooltip text={tooltip} visible={tooltipVisible} />
     </li>
   );
@@ -352,11 +341,13 @@ const styles = {
     justifyContent: 'center',
     gap: '0.4rem',
     borderRadius: 5,
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'inherit',
     fontWeight: 500,
     color: '#555',
     textDecoration: 'none',
+    textAlign: 'center',
+    lineHeight: 1.3,
     background: 'transparent',
     transition: 'background 0.15s, color 0.15s',
     width: '100%',

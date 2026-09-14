@@ -39,7 +39,7 @@ export default function Hero() {
             className="hero-email-tooltip hero-animate"
             draggable="false"
             style={{ cursor: 'pointer' }}
-            onClick={() => navigator.clipboard.writeText('mockup@dauci.com').then(() => alert('Copied: mockup@dauci.com'))}
+            onClick={() => navigator.clipboard.writeText('design+mockup@uci.edu').then(() => alert('Copied: design+mockup@uci.edu'))}
           />
 
           {/* "Welcome to" label */}
@@ -69,7 +69,15 @@ export default function Hero() {
           </div>
 
           {/* Subtitle */}
-          <p className="hero-subtitle hero-animate">by [design at uci]</p>
+          <a
+            href="https://designatuci.com"
+            className="hero-subtitle hero-animate"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Design at UCI website"
+          >
+            by [design at uci]
+          </a>
 
           {/* Tagline */}
           <p className="hero-tagline hero-animate">

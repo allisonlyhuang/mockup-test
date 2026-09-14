@@ -280,6 +280,7 @@ export default function PhaseSlider({ phases, frame, className = "" }) {
   const stripRef = useRef(null);
   const [stripEl, setStripEl] = useState(null);
   const [sectionVisible, setSectionVisible] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Fire once when the section scrolls into the page viewport
   useEffect(() => {
@@ -312,6 +313,19 @@ export default function PhaseSlider({ phases, frame, className = "" }) {
   }, [onWheel, onTouchMove]);
 
   useEffect(() => {
+    if (!stripEl) return;
+
+    const updateScrollProgress = () => {
+      const maxScroll = stripEl.scrollWidth - stripEl.clientWidth;
+      setScrollProgress(maxScroll > 0 ? stripEl.scrollLeft / maxScroll : 0);
+    };
+
+    stripEl.addEventListener("scroll", updateScrollProgress, { passive: true });
+    updateScrollProgress();
+    return () => stripEl.removeEventListener("scroll", updateScrollProgress);
+  }, [stripEl]);
+
+  useEffect(() => {
     const node = sectionRef.current;
     return () => {
       if (!node) return;
@@ -332,6 +346,16 @@ export default function PhaseSlider({ phases, frame, className = "" }) {
           <SlideObserver key={phase.id ?? i} phase={phase} frame={frame} strip={stripEl} sectionVisible={sectionVisible} />
         ))}
         <div style={{ flexShrink: 0, width: "clamp(2rem, 8vw, 7rem)" }} />
+      </div>
+      <div className="phase-carousel__scroll-indicator" aria-label="Project phases scroll position">
+        <span>Scroll to explore</span>
+        <div className="phase-carousel__scroll-track" aria-hidden="true">
+          <div
+            className="phase-carousel__scroll-thumb"
+            style={{ transform: `translateX(${scrollProgress * 100}%)` }}
+          />
+        </div>
+        <span>05</span>
       </div>
     </div>
   );

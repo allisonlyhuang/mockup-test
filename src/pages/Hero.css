@@ -206,6 +206,8 @@
   margin: clamp(-1rem, -2vw, 0.5rem) 0 0;
   animation-name: hero-rise;
   animation-delay: 0.45s;
+  pointer-events: auto;
+  cursor: pointer;
 }
 
 /* ── "when ideas meet creators" ── */
