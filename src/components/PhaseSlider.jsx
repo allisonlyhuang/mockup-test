@@ -33,6 +33,34 @@ const PHASE_CAROUSEL_CSS = `
 .phase-carousel__strip::-webkit-scrollbar {
   display: none;
 }
+.phase-carousel__scroll-indicator {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 clamp(2rem, 8vw, 7rem);
+  padding-top: 2px;
+  color: #777;
+  font-family: Inter, system-ui, sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.phase-carousel__scroll-track {
+  position: relative;
+  flex: 1;
+  height: 3px;
+  overflow: hidden;
+  background: #d9d9d9;
+}
+.phase-carousel__scroll-thumb {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 22%;
+  background: #0d9aff;
+  transition: left 0.12s ease-out;
+}
 .phase-carousel__slide {
   flex: 0 0 var(--pc-card-width);
   box-sizing: border-box;
@@ -354,7 +382,7 @@ export default function PhaseSlider({ phases, frame, className = "" }) {
         <div className="phase-carousel__scroll-track" aria-hidden="true">
           <div
             className="phase-carousel__scroll-thumb"
-            style={{ transform: `translateX(${scrollProgress * 100}%)` }}
+            style={{ left: `${scrollProgress * 78}%` }}
           />
         </div>
         <span>05</span>
