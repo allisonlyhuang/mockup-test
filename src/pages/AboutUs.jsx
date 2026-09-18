@@ -43,7 +43,7 @@ export default function AboutUs() {
           </p>
 
           <p className="about-para about-para--bold">
-            Check out past opportunities here!
+            Scroll through our past project opportunities here!
           </p>
         </div>
 

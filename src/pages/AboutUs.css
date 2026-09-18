@@ -75,8 +75,12 @@
 .about-right {
   flex: 1;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
+  align-self: stretch;
   justify-content: flex-end;
   min-width: 0;
-  margin-top: -8rem;
+}
+
+.about-right .vac-root {
+  margin-top: -36px;
 }

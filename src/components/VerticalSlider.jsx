@@ -29,9 +29,11 @@ const ENTRIES = [
   },
 ];
 
-const SPACING = 450;
-const ARC    = 900;
-const clamp  = (v, min, max) => Math.max(min, Math.min(max, v));
+const WHEEL_SENSITIVITY = 400; // px of wheel delta mapped to one full card step
+const DRAG_SPACING      = 260; // px of drag distance mapped to one full card step
+const ENTER_OFFSET      = 46; // px an upcoming card peeks below the active one before its turn
+const STACK_STEP        = 46;  // px each retired card nudges up behind the active one
+const clamp = (v, min, max) => Math.max(min, Math.min(max, v));
 
 export default function VerticalSlider() {
   const containerRef    = useRef(null);
@@ -49,39 +51,42 @@ export default function VerticalSlider() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [dragging, setDragging]       = useState(false);
 
-  // ── Position all cards based on current scroll position ──────────────
-  const applyStyles = useCallback((pos, immediate = false) => {
+  // ── Position every card based on continuous scroll position ───────────
+  const applyStack = useCallback((pos) => {
     ENTRIES.forEach((_, i) => {
       const el     = cardRefs.current[i];
       const textEl = textRefs.current[i];
       if (!el) return;
 
-      const d    = i - pos;
-      const absD = Math.abs(d);
-      const vars = {
-        x:       Math.min(absD * absD * 400, ARC),
-        y:       d * SPACING,
-        scale:   clamp(1 - absD * 0.17, 0.34, 1),
-        rotateZ: clamp(d * -3.4, -16, 16),
-        opacity: clamp(1 - absD * 0.32, 0, 1),
-        filter:  `blur(${clamp(absD * 3.4, 0, 16)}px)`,
-        zIndex:  Math.round(200 - absD * 10),
-        overwrite: "auto",
-      };
+      const d = i - pos;
+      let vars;
 
-      immediate
-        ? gsap.set(el, vars)
-        : gsap.to(el, { ...vars, duration: 0.75, ease: "power3.out" });
+      if (d >= 0) {
+        // Not yet arrived — waits below, sliding up into place on its turn.
+        const t = clamp(d, 0, 1);
+        vars = {
+          y:       t * ENTER_OFFSET,
+          scale:   1 - t * 0.04,
+          opacity: clamp(1 - t * 0.6, 0.4, 1),
+          filter:  "brightness(1)",
+        };
+      } else {
+        // Already active or retired into the stack behind the current card.
+        const depth = clamp(-d, 0, 3);
+        vars = {
+          y:       -depth * STACK_STEP,
+          scale:   clamp(1 - depth * 0.05, 0.82, 1),
+          opacity: clamp(1 - depth * 0.15, 0.35, 1),
+          filter:  `brightness(${clamp(1 - depth * 0.08, 0.7, 1)})`,
+        };
+      }
+
+      const zIndex = Math.round(100 - Math.abs(d) * 10);
+      gsap.set(el, { ...vars, zIndex, overwrite: "auto" });
 
       if (textEl) {
-        const textVars = {
-          opacity: absD < 0.5 ? 1 - absD / 0.5 : 0,
-          y:       absD < 0.5 ? 0 : 12,
-          overwrite: "auto",
-        };
-        immediate
-          ? gsap.set(textEl, textVars)
-          : gsap.to(textEl, { ...textVars, duration: 0.6, ease: "power3.out" });
+        const showText = Math.abs(d) < 0.12;
+        gsap.set(textEl, { opacity: showText ? 1 : 0, y: showText ? 0 : 8, overwrite: "auto" });
       }
     });
   }, []);
@@ -93,14 +98,14 @@ export default function VerticalSlider() {
     const proxy = { p: positionRef.current };
     snapTween.current = gsap.to(proxy, {
       p:        target,
-      duration: opts.duration ?? 0.7,
+      duration: opts.duration ?? 0.6,
       ease:     "power3.out",
-      onUpdate:  () => { positionRef.current = proxy.p; applyStyles(proxy.p); },
-      onComplete:() => { positionRef.current = target; applyStyles(target); setActiveIndex(target); },
+      onUpdate:  () => { positionRef.current = proxy.p; applyStack(proxy.p); },
+      onComplete:() => { positionRef.current = target; applyStack(target); setActiveIndex(target); },
     });
-  }, [applyStyles]);
+  }, [applyStack]);
 
-  // ── Wheel ─────────────────────────────────────────────────────────────
+  // ── Wheel (only fires while the cursor is over the hitbox) ────────────
   useEffect(() => {
     const el = containerRef.current;
     if (!el) return;
@@ -108,14 +113,14 @@ export default function VerticalSlider() {
       e.preventDefault();
       e.stopPropagation();
       snapTween.current?.kill();
-      positionRef.current = clamp(positionRef.current + e.deltaY / 260, 0, ENTRIES.length - 1);
-      applyStyles(positionRef.current);
+      positionRef.current = clamp(positionRef.current + e.deltaY / WHEEL_SENSITIVITY, 0, ENTRIES.length - 1);
+      applyStack(positionRef.current);
       clearTimeout(wheelTimeout.current);
       wheelTimeout.current = setTimeout(() => goTo(positionRef.current), 120);
     };
     el.addEventListener("wheel", onWheel, { passive: false });
     return () => { el.removeEventListener("wheel", onWheel); clearTimeout(wheelTimeout.current); };
-  }, [applyStyles, goTo]);
+  }, [applyStack, goTo]);
 
   useEffect(() => () => {
     snapTween.current?.kill();
@@ -137,9 +142,9 @@ export default function VerticalSlider() {
 
   const onPointerMove = (e) => {
     if (!isDragging.current) return;
-    const next = clamp(dragStartPos.current - (e.clientY - dragStartY.current) / SPACING, 0, ENTRIES.length - 1);
+    const next = clamp(dragStartPos.current - (e.clientY - dragStartY.current) / DRAG_SPACING, 0, ENTRIES.length - 1);
     positionRef.current = next;
-    applyStyles(next, true);
+    applyStack(next);
     const now = performance.now();
     const dt  = now - lastT.current;
     if (dt > 0) velocity.current = (e.clientY - lastY.current) / dt;
@@ -151,7 +156,7 @@ export default function VerticalSlider() {
     if (!isDragging.current) return;
     isDragging.current = false;
     setDragging(false);
-    goTo(positionRef.current + (-velocity.current * 140) / SPACING, { duration: 0.8 });
+    goTo(positionRef.current + (-velocity.current * 140) / DRAG_SPACING, { duration: 0.7 });
   };
 
   // ── Keyboard ──────────────────────────────────────────────────────────
@@ -160,13 +165,11 @@ export default function VerticalSlider() {
     if (e.key === "ArrowUp")   { e.preventDefault(); goTo(activeIndex - 1); }
   };
 
-  useEffect(() => { applyStyles(0, true); }, [applyStyles]);
+  useEffect(() => { applyStack(0); }, [applyStack]);
 
   return (
     <div className="vac-root">
       <div className="vac-stage-wrap">
-
-        {/* Card stage */}
         <div
           ref={containerRef}
           className={`vac-stage${dragging ? " dragging" : ""}`}
@@ -196,15 +199,8 @@ export default function VerticalSlider() {
                   {entry.img ? (
                     <img src={entry.img} alt={entry.title} draggable={false} />
                   ) : (
-                    <div style={{
-                      width: "100%", height: "100%",
-                      background: "linear-gradient(135deg, #e8edf2 0%, #d0d8e4 100%)",
-                      display: "flex", flexDirection: "column",
-                      alignItems: "center", justifyContent: "center", gap: 10,
-                    }}>
-                      <span style={{ fontSize: 14, fontWeight: 600, color: "#6b7280", letterSpacing: "0.08em", textTransform: "uppercase", fontFamily: "Inter, system-ui, sans-serif" }}>
-                        Coming Soon
-                      </span>
+                    <div className="vac-card-placeholder">
+                      <span>Coming Soon</span>
                     </div>
                   )}
                 </div>
@@ -221,7 +217,6 @@ export default function VerticalSlider() {
             ))}
           </div>
         </div>
-
       </div>
     </div>
   );
