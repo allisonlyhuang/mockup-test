@@ -8,30 +8,61 @@
   width: 100%;
 }
 
-.phase-carousel__strip {
+.phase-carousel__viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 0 0 16px clamp(2rem, 8vw, 7rem);
+  box-sizing: border-box;
+}
+
+.phase-carousel__track {
   display: flex;
   flex-direction: row;
   gap: var(--pc-gap);
-  overflow-x: auto;
-  overflow-y: hidden;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-  touch-action: auto;
-  cursor: default;
-  padding: 0 0 16px clamp(2rem, 8vw, 7rem);
-  width: 100%;
-  box-sizing: border-box;
-  scrollbar-width: none;
+  width: max-content;
+  transition: transform 0.5s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
-.phase-carousel__strip::-webkit-scrollbar { display: none; }
+.phase-carousel__controls {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin: 0 clamp(2rem, 8vw, 7rem);
+  padding-top: 2px;
+}
 
-.phase-carousel__scroll-indicator {
+.phase-carousel__arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #d9d9d9;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--pc-ink);
+  font-size: 18px;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease;
+}
+
+.phase-carousel__arrow:hover:not(:disabled) {
+  border-color: var(--pc-accent);
+  color: var(--pc-accent);
+}
+
+.phase-carousel__arrow:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
+.phase-carousel__progress {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 0 clamp(2rem, 8vw, 7rem);
-  padding-top: 2px;
+  flex: 1;
   color: #777;
   font-family: var(--font-body);
   font-size: 11px;
@@ -39,7 +70,7 @@
   text-transform: uppercase;
 }
 
-.phase-carousel__scroll-track {
+.phase-carousel__progress-track {
   position: relative;
   flex: 1;
   height: 3px;
@@ -47,14 +78,14 @@
   background: #d9d9d9;
 }
 
-.phase-carousel__scroll-thumb {
+.phase-carousel__progress-thumb {
   position: absolute;
   top: 0;
   bottom: 0;
   left: 0;
   width: 22%;
   background: var(--pc-accent);
-  transition: left 0.12s ease-out;
+  transition: left 0.4s cubic-bezier(0.65, 0, 0.35, 1);
 }
 
 .phase-carousel__slide {

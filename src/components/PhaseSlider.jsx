@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { DrawSVGPlugin } from "gsap/DrawSVGPlugin";
+import { ChevronLeftIcon, ChevronRightIcon } from "@radix-ui/react-icons";
 import "./PhaseSlider.css";
 
 gsap.registerPlugin(DrawSVGPlugin);
@@ -141,39 +142,13 @@ function PhaseCard({ phase, active, frame }) {
   );
 }
 
-function SlideObserver({ phase, frame, strip, sectionVisible }) {
-  const slideRef = useRef(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const slide = slideRef.current;
-    if (!slide || !strip || !sectionVisible) return;
-
-    const check = () => {
-      const sr = strip.getBoundingClientRect();
-      const el = slide.getBoundingClientRect();
-      const overlap = Math.min(el.right, sr.right) - Math.max(el.left, sr.left);
-      setVisible(overlap / el.width >= 0.3);
-    };
-
-    strip.addEventListener("scroll", check, { passive: true });
-    check();
-    return () => strip.removeEventListener("scroll", check);
-  }, [strip, sectionVisible]);
-
-  return (
-    <div className="phase-carousel__slide" ref={slideRef}>
-      <PhaseCard phase={phase} active={visible} frame={frame} />
-    </div>
-  );
-}
-
 export default function PhaseSlider({ phases, frame, className = "" }) {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [translateX, setTranslateX] = useState(0);
   const sectionRef = useRef(null);
-  const stripRef = useRef(null);
-  const [stripEl, setStripEl] = useState(null);
+  const trackRef = useRef(null);
+  const slideRefs = useRef([]);
   const [sectionVisible, setSectionVisible] = useState(false);
-  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Fire once when the section scrolls into the page viewport
   useEffect(() => {
@@ -187,62 +162,74 @@ export default function PhaseSlider({ phases, frame, className = "" }) {
     return () => observer.disconnect();
   }, []);
 
-  const onWheel = useCallback((e) => {
-    const strip = stripRef.current;
-    if (!strip || Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
-    e.preventDefault();
-    strip.scrollLeft += e.deltaX;
-  }, []);
+  const updateTranslate = useCallback(() => {
+    const target = slideRefs.current[activeIndex];
+    if (!target) return;
+    setTranslateX(target.offsetLeft);
+  }, [activeIndex]);
 
-  const setCarouselRef = useCallback((node) => {
-    sectionRef.current = node;
-    if (!node) return;
-    node.addEventListener("wheel", onWheel, { passive: false });
-  }, [onWheel]);
+  useLayoutEffect(() => {
+    updateTranslate();
+  }, [updateTranslate]);
 
   useEffect(() => {
-    if (!stripEl) return;
+    window.addEventListener("resize", updateTranslate);
+    return () => window.removeEventListener("resize", updateTranslate);
+  }, [updateTranslate]);
 
-    const updateScrollProgress = () => {
-      const maxScroll = stripEl.scrollWidth - stripEl.clientWidth;
-      setScrollProgress(maxScroll > 0 ? stripEl.scrollLeft / maxScroll : 0);
-    };
+  const goPrev = () => setActiveIndex((i) => Math.max(0, i - 1));
+  const goNext = () => setActiveIndex((i) => Math.min(phases.length - 1, i + 1));
 
-    stripEl.addEventListener("scroll", updateScrollProgress, { passive: true });
-    updateScrollProgress();
-    return () => stripEl.removeEventListener("scroll", updateScrollProgress);
-  }, [stripEl]);
-
-  useEffect(() => {
-    const node = sectionRef.current;
-    return () => {
-      if (!node) return;
-      node.removeEventListener("wheel", onWheel);
-    };
-  }, [onWheel]);
-
-  const setRefs = useCallback((node) => {
-    stripRef.current = node;
-    setStripEl(node);
-  }, []);
+  const progress = phases.length > 1 ? activeIndex / (phases.length - 1) : 0;
 
   return (
-    <div className={`phase-carousel ${className}`} ref={setCarouselRef}>
-      <div className="phase-carousel__strip" ref={setRefs}>
-        {phases.map((phase, i) => (
-          <SlideObserver key={phase.id ?? i} phase={phase} frame={frame} strip={stripEl} sectionVisible={sectionVisible} />
-        ))}
-        <div style={{ flexShrink: 0, width: "clamp(2rem, 8vw, 7rem)" }} />
-      </div>
-      <div className="phase-carousel__scroll-indicator" aria-label="Project phases scroll position">
-        <span>Scroll to explore</span>
-        <div className="phase-carousel__scroll-track" aria-hidden="true">
-          <div
-            className="phase-carousel__scroll-thumb"
-            style={{ left: `${scrollProgress * 78}%` }}
-          />
+    <div className={`phase-carousel ${className}`} ref={sectionRef}>
+      <div className="phase-carousel__viewport">
+        <div
+          className="phase-carousel__track"
+          ref={trackRef}
+          style={{ transform: `translateX(-${translateX}px)` }}
+        >
+          {phases.map((phase, i) => (
+            <div
+              className="phase-carousel__slide"
+              key={phase.id ?? i}
+              ref={(el) => { slideRefs.current[i] = el; }}
+            >
+              <PhaseCard phase={phase} active={sectionVisible && i === activeIndex} frame={frame} />
+            </div>
+          ))}
         </div>
-        <span>05</span>
+      </div>
+      <div className="phase-carousel__controls">
+        <button
+          type="button"
+          className="phase-carousel__arrow"
+          onClick={goPrev}
+          disabled={activeIndex === 0}
+          aria-label="Previous phase"
+        >
+          <ChevronLeftIcon width={18} height={18} />
+        </button>
+        <div className="phase-carousel__progress" aria-label="Project phases progress">
+          <span>{String(activeIndex + 1).padStart(2, "0")}</span>
+          <div className="phase-carousel__progress-track" aria-hidden="true">
+            <div
+              className="phase-carousel__progress-thumb"
+              style={{ left: `${progress * 78}%` }}
+            />
+          </div>
+          <span>{String(phases.length).padStart(2, "0")}</span>
+        </div>
+        <button
+          type="button"
+          className="phase-carousel__arrow"
+          onClick={goNext}
+          disabled={activeIndex === phases.length - 1}
+          aria-label="Next phase"
+        >
+          <ChevronRightIcon width={18} height={18} />
+        </button>
       </div>
     </div>
   );
