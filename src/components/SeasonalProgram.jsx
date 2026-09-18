@@ -34,9 +34,9 @@ const FACULTY = [
 ];
 
 const STAKEHOLDERS = [
-  { name: 'Agatha Kielczewski', role: 'Roblox Stakeholder' },
-  { name: 'Day Yantone', role: 'Roblox Stakeholder' },
-  { name: 'Tram Renteria', role: 'Roblox Stakeholder' },
+  { name: 'Executive Business Partner to CDO', role: 'Roblox Stakeholder' },
+  { name: 'Sr. Product Product Program Manager', role: 'Roblox Stakeholder' },
+  { name: 'Product Design Manager, Safety Experience', role: 'Roblox Stakeholder' }
 ];
 
 function PeopleList({ people, defaultRole, columns = 1 }) {

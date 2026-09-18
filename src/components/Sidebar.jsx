@@ -240,47 +240,64 @@ export default function Sidebar({ lenisRef }) {
 // ── Layer item (social link) ──────────────────────────────────────────────────
 function LayerItem({ label, tooltip, href, icon }) {
   const { hovered, setHovered, tooltipVisible, showTooltip, hideTooltip } = useTooltip();
-  const LinkComponent                = href.startsWith('/') ? Link : 'a';
-  const linkProps                    = href.startsWith('/')
-    ? { to: href }
-    : { href, target: '_blank', rel: 'noopener noreferrer' };
+  const isMailto = href.startsWith('mailto:');
+
+  const itemStyle = {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.45rem',
+    fontSize: 12,
+    fontFamily: 'inherit',
+    fontWeight: 400,
+    color: hovered ? '#111' : '#555',
+    textDecoration: 'none',
+    padding: '0.3rem 0.5rem',
+    borderRadius: 5,
+    background: hovered ? 'rgba(0,0,0,0.05)' : 'none',
+    transition: 'background 0.15s, color 0.15s',
+    letterSpacing: '0.01em',
+    lineHeight: 1.4,
+    width: '100%',
+    boxSizing: 'border-box',
+  };
+
+  const eventHandlers = {
+    onMouseEnter: () => { setHovered(true); showTooltip(); },
+    onMouseLeave: () => { setHovered(false); hideTooltip(); },
+  };
+
+  const content = (
+    <>
+      <span style={{ flexShrink: 0, opacity: hovered ? 0.9 : 0.45, display: 'flex' }}>
+        {icon}
+      </span>
+      {label}
+    </>
+  );
 
   return (
     <li style={{ display: 'flex', position: 'relative' }}>
-      <LinkComponent
-        {...linkProps}
-        onMouseEnter={() => {
-          setHovered(true);
-          showTooltip();
-        }}
-        onMouseLeave={() => {
-          setHovered(false);
-          hideTooltip();
-        }}
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          gap: '0.45rem',
-          fontSize: 12,
-          fontFamily: 'inherit',
-          fontWeight: 400,
-          color: hovered ? '#111' : '#555',
-          textDecoration: 'none',
-          padding: '0.3rem 0.5rem',
-          borderRadius: 5,
-          background: hovered ? 'rgba(0,0,0,0.05)' : 'none',
-          transition: 'background 0.15s, color 0.15s',
-          letterSpacing: '0.01em',
-          lineHeight: 1.4,
-          width: '100%',
-          boxSizing: 'border-box',
-        }}
-      >
-        <span style={{ flexShrink: 0, opacity: hovered ? 0.9 : 0.45, display: 'flex' }}>
-          {icon}
-        </span>
-        {label}
-      </LinkComponent>
+      {isMailto ? (
+        <button
+          type="button"
+          onClick={() => {
+            const email = href.slice('mailto:'.length);
+            navigator.clipboard.writeText(email).then(() => alert(`Copied: ${email}`));
+          }}
+          {...eventHandlers}
+          style={{ ...itemStyle, border: 'none', cursor: 'pointer', textAlign: 'left' }}
+        >
+          {content}
+        </button>
+      ) : href.startsWith('/') ? (
+        <Link to={href} {...eventHandlers} style={itemStyle}>
+          {content}
+        </Link>
+      ) : (
+        <a href={href} target="_blank" rel="noopener noreferrer" {...eventHandlers} style={itemStyle}>
+          {content}
+        </a>
+      )}
       <Tooltip text={tooltip} visible={tooltipVisible} />
     </li>
   );
