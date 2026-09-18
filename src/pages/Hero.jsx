@@ -26,6 +26,16 @@ export default function Hero() {
     });
   }, { scope: chevronRef });
 
+  const scrollToSeasonalProgram = () => {
+    const target = document.getElementById('seasonal-program');
+    if (!target) return;
+    gsap.to(window, {
+      scrollTo: { y: target, offsetY: 0 },
+      duration: 2,
+      ease: 'power2.inOut',
+    });
+  };
+
   return (
     <>
       <section id="hero" className="hero-section" aria-label="Hero">
@@ -90,7 +100,7 @@ export default function Hero() {
 
         {/* Posts — absolutely positioned, no layout impact */}
         <div className="hero-posts">
-          <RobloxPosts />
+          <RobloxPosts onClick={scrollToSeasonalProgram} />
         </div>
 
         {/* Body text */}
@@ -99,15 +109,7 @@ export default function Hero() {
 
         <p className="hero-body" style={{ whiteSpace: 'nowrap', margin: '0 0 0.75rem' }}>From portfolios to partnerships. Applications for Fall 2026 open now.{' '}<Link to="/apply" className="hero-apply-link">Apply here <MoveRight size={13} strokeWidth={2.5} style={{ verticalAlign: 'middle' }} /></Link></p>
 
-        <button className="hero-learn-more" onClick={() => {
-          const target = document.getElementById('about-us');
-          if (!target) return;
-          gsap.to(window, {
-            scrollTo: { y: target, offsetY: 0 },
-            duration: 2,
-            ease: 'power2.inOut',
-          });
-        }}>
+        <button className="hero-learn-more" onClick={scrollToSeasonalProgram}>
           <span className="hero-learn-more-label">Learn More</span>
           <ChevronDown ref={chevronRef} className="hero-learn-more-chevron" size={20} strokeWidth={1.5} />
         </button>

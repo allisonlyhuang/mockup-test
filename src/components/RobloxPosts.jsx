@@ -3,7 +3,7 @@ import { gsap } from "gsap";
 import incoming_post from "../assets/hero/incoming_post.svg";
 import roblox_post from "../assets/hero/roblox_post.svg";
 
-export default function AnimatedStickyStack() {
+export default function AnimatedStickyStack({ onClick }) {
   const sceneRef = useRef(null);
   const backRef = useRef(null);
   const frontRef = useRef(null);
@@ -96,7 +96,12 @@ export default function AnimatedStickyStack() {
     <div
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
-      style={{ position: "relative", width: 328, height: 198 }}
+      onClick={onClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => { if (onClick && (e.key === "Enter" || e.key === " ")) { e.preventDefault(); onClick(); } }}
+      aria-label="Scroll to our seasonal program"
+      style={{ position: "relative", width: 328, height: 198, cursor: onClick ? "pointer" : undefined }}
     >
       <div ref={sceneRef} style={{ position: "relative", width: "100%", height: "100%" }}>
         <img
