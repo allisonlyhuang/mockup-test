@@ -51,24 +51,24 @@ const STEPS = [
     ),
   },
   {
-    phase: "Oct. 4 (Sunday) - Oct. 9 (Friday)",
+    phase: "Oct. 4 (Sunday) - Oct. 7 (Wednesday)",
     date: "Whiteboarding & Interview",
     detail: (
       <>
         Interview decisions will be released{" "}
-        <strong>Saturday, October 3rd.</strong> Selected applicants will be
+        <strong>Friday night, October 2nd.</strong> Selected applicants will be
         invited for a short whiteboarding session and casual interview with
         directors. This is a chance for us to get to know you and for you to
         learn more about the program.
         <strong>
           {" "}
-          Final decisions will be released Saturday, October 10th.
+          Final decisions will be released Wednesday night, October 7th.
         </strong>
       </>
     ),
   },
   {
-    phase: "Oct. 12 (Monday)",
+    phase: "Oct. 9 (Friday)",
     date: "Kickoff & Onboarding",
     detail: (
       <>
@@ -92,14 +92,14 @@ const STEPS = [
     ),
   },
   {
-    phase: "Oct. 13 (Tuesday) - Nov. 26 (Thursday)",
+    phase: "Oct. 12 (Monday) - Nov. 30 (Monday)",
     date: "Project Scrums & Sprints",
     detail: (
       <>
-        Weekly working sessions run throughout the 7-week sprints.{" "}
-        <strong>Every Tuesday</strong> is an open session with your UCI grad
-        faculty advisor to check in on progress and get feedback.
-        <strong> Every Thursday</strong> is your stakeholder meeting with Roblox
+        Weekly working sessions run throughout the 9-week sprints.{" "}
+        <strong>Every Monday</strong> is an open session with your UCI grad
+        faculty mentor to check in on progress and get feedback from Roblox stakeholders.
+        <strong> Every Friday</strong> is your stakeholder meeting with Roblox
         to demo progress and align on next steps, as long as realign on business
         goals.
       </>

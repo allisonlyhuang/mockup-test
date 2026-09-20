@@ -45,7 +45,7 @@ const VALUES = [
     pronunciation: '/kəˈmyo͞onədē/',
     definition: (
       <>
-        MockUp is built on the belief that students and companies grow stronger
+        Mockup is built on the belief that students and companies grow stronger
         together — fostering{' '}
         <mark>genuine relationships that extend beyond a single project</mark>{' '}
         and into lasting professional networks. We create a space where
@@ -125,7 +125,7 @@ export default function Values() {
 
       <p ref={subtitleRef} className="values-subtitle">
         The best experiences happen when you get out of the classroom and into
-        the real world. That's why MockUp brings students, companies, and big
+        the real world. That's why Mockup brings students, companies, and big
         ideas together to create opportunities that are exciting, meaningful,
         and actually useful. Our values shape how we show up, make connections,
         and turn "what if?" into "let's do it."

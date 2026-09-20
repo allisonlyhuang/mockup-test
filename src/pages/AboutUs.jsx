@@ -21,7 +21,7 @@ export default function AboutUs() {
         {/* Body copy */}
         <div className="about-body">
           <p className="about-para">
-            Launched in Fall 2026, <strong>MockUp at Design @ UCI</strong> empowers
+            Launched in Fall 2026, <strong>Mockup by Design at UCI</strong> empowers
             emerging designers by connecting UC Irvine students with real-world
             opportunities to collaborate with companies, startups, and brands.
           </p>
@@ -37,7 +37,7 @@ export default function AboutUs() {
           <div className="about-spacer" />
 
           <p className="about-para">
-            Starting with our 9-week program with <strong>Roblox</strong>, MockUp will
+            Starting with our 9-week program with <strong>Roblox</strong>, Mockup will
             have unique opportunities open every Fall and Spring quarter. Keep an eye
             out weeks 0–1 for opportunities to get involved, don't miss our applications!
           </p>

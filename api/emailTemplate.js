@@ -20,7 +20,7 @@ export function buildConfirmationEmail(name = "applicant") {
       <table style="width:100%;border-collapse:collapse;margin:0 0 20px">
         <tr>
           <td style="padding:10px 12px;border:1px solid #e4e4e7;border-radius:6px 6px 0 0;vertical-align:top;width:160px">
-            <strong style="font-size:13px;color:#18181b;white-space:nowrap">Mon, Dec 4 @ 7 PM</strong>
+            <strong style="font-size:13px;color:#18181b;white-space:nowrap">Fri, Oct 9 @ 7 PM</strong>
           </td>
           <td style="padding:10px 12px;border:1px solid #e4e4e7;border-left:none;border-radius:0 6px 6px 0;vertical-align:top">
             <span style="font-size:13px;font-weight:600;color:#18181b">Kick-Off Session</span><br/>
@@ -29,7 +29,7 @@ export function buildConfirmationEmail(name = "applicant") {
         </tr>
         <tr>
           <td style="padding:10px 12px;border:1px solid #e4e4e7;border-top:none;border-radius:0 0 0 6px;vertical-align:top;width:160px">
-            <strong style="font-size:13px;color:#18181b;white-space:nowrap">Fri, Oct 12 @ 7 PM</strong>
+            <strong style="font-size:13px;color:#18181b;white-space:nowrap">Fri, Dec 4 @ 7 PM</strong>
           </td>
           <td style="padding:10px 12px;border:1px solid #e4e4e7;border-top:none;border-left:none;border-radius:0 0 6px 0;vertical-align:top">
             <span style="font-size:13px;font-weight:600;color:#18181b">Final Case Study &amp; Demo Day</span><br/>
@@ -42,7 +42,7 @@ export function buildConfirmationEmail(name = "applicant") {
       <table style="width:100%;border-collapse:collapse;margin:0 0 8px">
         <tr>
           <td style="padding:10px 12px;border:1px solid #e4e4e7;border-radius:6px 6px 0 0;vertical-align:top;width:160px">
-            <strong style="font-size:13px;color:#18181b;white-space:nowrap">Every Mon, Oct 19–Nov 23 @ 3 PM</strong>
+            <strong style="font-size:13px;color:#18181b;white-space:nowrap">Every Monday · Time TBA</strong>
           </td>
           <td style="padding:10px 12px;border:1px solid #e4e4e7;border-left:none;border-radius:0 6px 6px 0;vertical-align:top">
             <span style="font-size:13px;font-weight:600;color:#18181b">Open Session w/ UCI Mentor</span><br/>
@@ -51,7 +51,7 @@ export function buildConfirmationEmail(name = "applicant") {
         </tr>
         <tr>
           <td style="padding:10px 12px;border:1px solid #e4e4e7;border-top:none;vertical-align:top;width:160px">
-            <strong style="font-size:13px;color:#18181b;white-space:nowrap">Every Fri, Oct 22–Nov 26 @ 5 PM</strong>
+            <strong style="font-size:13px;color:#18181b;white-space:nowrap">Every Friday @ 10 AM</strong>
           </td>
           <td style="padding:10px 12px;border:1px solid #e4e4e7;border-top:none;border-left:none;vertical-align:top">
             <span style="font-size:13px;font-weight:600;color:#18181b">Stakeholder Meeting w/ Roblox</span><br/>

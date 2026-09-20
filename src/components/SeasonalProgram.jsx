@@ -10,8 +10,8 @@ import './SeasonalProgram.css';
 
 const PROGRAM_STEPS = [
   { number: '01', title: 'Kickoff', date: 'Oct 9 · 7 PM', detail: 'Prompt and business goals reveal! Meet the Roblox stakeholders, your team, and faculty professors' },
-  { number: '02', title: 'Open Sessions', date: 'Every Monday · Oct 19 – Nov 23 · 3 PM', detail: 'Open work sessions with your UCI mentor. Roblox office hours for questions.' },
-  { number: '03', title: 'Stakeholder Meetings', date: 'Every Friday · Oct 22 – Nov 26 · 5 PM', detail: 'Stakeholder meetings to show progress. Get professional, industry feedback.' },
+  { number: '02', title: 'Open Sessions', date: 'Every Monday · Oct 12 – Nov 30 · TBA', detail: 'Open work sessions with your UCI mentor. Roblox office hours for questions.' },
+  { number: '03', title: 'Stakeholder Meetings', date: 'Every Friday · Oct 16 – Nov 20 · 10 AM', detail: 'Stakeholder meetings to show progress. Get professional, industry feedback.' },
   { number: '04', title: 'Demo Day', date: 'Dec 4 · 7 PM', detail: 'Present your final case study. Your proposal should convince stakeholders that key metrics will be met.' },
 ];
 
@@ -23,14 +23,14 @@ const TEAMS = [
 
 // Add each person's display name and URL here when the final links are ready.
 const PROGRAM_DIRECTORS = [
-  { name: 'Allison Huang', href: 'https://www.linkedin.com/in/allisonlyhuang/' },
-  { name: 'Evie Ngo', href: 'https://www.linkedin.com/in/eviebngo/' },
-  { name: 'Queena Liu', href: 'https://www.linkedin.com/in/queena-liu/' },
+  { name: 'Allison Huang', href: 'https://www.linkedin.com/in/allisonlyhuang/', role: 'Operations Director' },
+  { name: 'Evie Ngo', href: 'https://www.linkedin.com/in/eviebngo/', role: 'Projects Director'},
+  { name: 'Queena Liu', href: 'https://www.linkedin.com/in/queena-liu/', role: 'Program Director'},
 ];
 
 const FACULTY = [
-  { name: 'Andre van der Hoek', href: 'https://www.linkedin.com/in/andr%C3%A9-van-der-hoek-1591423/' },
-  { name: 'Matthew J Bietz', href: 'https://www.linkedin.com/in/mbietz/' },
+  { name: 'Andre van der Hoek', href: 'https://www.linkedin.com/in/andr%C3%A9-van-der-hoek-1591423/', role: 'Associate Dean of Academic Affairs' },
+  { name: 'Matthew J Bietz', href: 'https://www.linkedin.com/in/mbietz/', role: 'MHCID Associate Director of Capstone' },
 ];
 
 const STAKEHOLDERS = [
@@ -122,7 +122,7 @@ export default function SeasonalProgram() {
           </div>
 
           <div className="seasonal-program-structure-group">
-            <h4><ReaderIcon aria-hidden="true" /> Faculty</h4>
+            <h4><ReaderIcon aria-hidden="true" /> UCI Faculty Mentors</h4>
             <p className="seasonal-program-team-note">Providing mentorship and guidance throughout the program.</p>
             <PeopleList people={FACULTY} defaultRole="Faculty Advisor" columns={2} />
           </div>

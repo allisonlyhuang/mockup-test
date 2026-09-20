@@ -126,7 +126,7 @@ export default function Apply() {
         >
           <p style={s.bodyText}>
             Thanks for your interest in our program. Please submit this form,
-            alongside your Take-Home, <strong>by Sept. 30.</strong> Best of
+            alongside your Take-Home, <strong style={{ color: "var(--accent-blue)" }}><underline>by Sept. 30.</underline></strong> Best of
             luck!
           </p>
         </div>

@@ -13,14 +13,14 @@ export default function BuildWithUs() {
           </h1>
           <p className="build-subtitle">
             Ready to bring fresh ideas and real design talent to your next project?
-            MockUp connects you with <strong>driven UC Irvine students</strong> ready to take on
+            Mockup connects you with <strong>driven UC Irvine students</strong> ready to take on
             meaningful design challenges, from kickoff to final deliverable. Whether
             you're building a brand identity, developing a design system, creating a
             full prototype, or reimagining an existing product, our designers are
             equipped to meet your needs.
             <br /><br />
             Have an idea you want to explore or a vision you're ready to bring to
-            life? MockUp gives you the talent, creativity, and support to take your
+            life? Mockup gives you the talent, creativity, and support to take your
             project from concept to completion. Send us an inquiry and we'll get back to you!
             <br /><br />
             <strong>Are you a student?</strong> Applications open Fall and Spring.{' '}
