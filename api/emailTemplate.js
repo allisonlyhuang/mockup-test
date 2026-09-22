@@ -14,7 +14,7 @@ export function buildConfirmationEmail(name = "applicant") {
     <div style="padding:32px 40px">
       <h2 style="font-size:20px;font-weight:600;color:#18181b;margin:0 0 16px;line-height:1.4">Your application has been received.</h2>
       <p style="font-size:15px;color:#18181b;line-height:1.6;margin:0 0 8px">Hi ${name},</p>
-      <p style="font-size:15px;color:#18181b;line-height:1.6;margin:0 0 24px">Thank you so much for your interest in our program! We're so excited for what's in store. Make sure you can attend all the events below. Decisions will be released October 4th. Keep an eye out!</p>
+      <p style="font-size:15px;color:#18181b;line-height:1.6;margin:0 0 24px">Thank you so much for your interest in our program! We're so excited for what's in store. Make sure you can attend all the events below. Decisions will be released October 7th. Keep an eye out!</p>
 
       <p style="font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;color:#71717a;margin:0 0 10px">Important Events</p>
       <table style="width:100%;border-collapse:collapse;margin:0 0 20px">
