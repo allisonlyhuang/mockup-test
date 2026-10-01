@@ -90,7 +90,7 @@ export default function CommentPin({
   return (
     <div
       ref={rootRef}
-      style={{ position: 'absolute', display: 'inline-block', ...style }}
+      style={{ position: 'absolute', display: 'inline-block', zIndex: 10, ...style }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
