@@ -1,5 +1,3 @@
-import { Link } from 'react-router-dom';
-import { MoveRight } from 'lucide-react';
 import {
   GlobeIcon,
   Pencil2Icon,
@@ -35,7 +33,7 @@ const FACULTY = [
 
 const STAKEHOLDERS = [
   { name: 'Executive Business Partner to CDO', role: 'Roblox Stakeholder' },
-  { name: 'Sr. Product Product Program Manager', role: 'Roblox Stakeholder' },
+  { name: 'Sr. Product Design Program Manager', role: 'Roblox Stakeholder' },
   { name: 'Product Design Manager, Safety Experience', role: 'Roblox Stakeholder' }
 ];
 
@@ -71,10 +69,9 @@ export default function SeasonalProgram() {
             A nine-week UI/UX design program where UCI students work with real stakeholders
             to turn a meaningful problem into a polished product.
           </p>
-          <Link to="/apply" className="seasonal-program-cta">
-            Apply for Fall 2026
-            <MoveRight size={16} strokeWidth={2.2} aria-hidden="true" />
-          </Link>
+          <span className="seasonal-program-cta closed" aria-disabled="true">
+            Apps Closed
+          </span>
         </div>
 
         <img

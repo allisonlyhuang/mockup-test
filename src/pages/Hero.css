@@ -276,17 +276,3 @@
   display: block;
 }
 
-/* ── Apply link ── */
-.hero-apply-link {
-  position: relative;
-  z-index: 1;
-  color: var(--accent-blue);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.hero-apply-link:hover {
-  color: #0770bb;
-}

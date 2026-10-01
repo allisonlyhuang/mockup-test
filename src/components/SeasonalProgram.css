@@ -84,6 +84,19 @@
   transform: translateY(-2px);
 }
 
+.seasonal-program-cta.closed {
+  cursor: default;
+  opacity: 0.55;
+  box-shadow: none;
+}
+
+.seasonal-program-cta.closed:hover,
+.seasonal-program-cta.closed:focus-visible {
+  background: #ffffff;
+  color: #161616;
+  transform: none;
+}
+
 .seasonal-program-timeline {
   position: relative;
   display: grid;

@@ -21,9 +21,9 @@ const SOCIAL_ITEMS = [
     icon: <EnvelopeClosedIcon width={12} height={12} />,
   },
   {
-    label: 'Apply',
-    tooltip: 'Apply to Mockup',
-    href: '/apply',
+    label: 'Apps Closed',
+    tooltip: 'Applications are closed',
+    disabled: true,
     icon: <FileTextIcon width={12} height={12} />,
   },
 ];
@@ -207,8 +207,8 @@ export default function Sidebar({ lenisRef }) {
         <span style={styles.sectionLabel}>GET IN TOUCH</span>
       </div>
       <ul style={styles.list}>
-        {SOCIAL_ITEMS.map(({ label, tooltip, href, icon }) => (
-          <LayerItem key={label} label={label} tooltip={tooltip} href={href} icon={icon} />
+        {SOCIAL_ITEMS.map(({ label, tooltip, href, icon, disabled }) => (
+          <LayerItem key={label} label={label} tooltip={tooltip} href={href} icon={icon} disabled={disabled} />
         ))}
       </ul>
 
@@ -238,9 +238,9 @@ export default function Sidebar({ lenisRef }) {
 }
 
 // ── Layer item (social link) ──────────────────────────────────────────────────
-function LayerItem({ label, tooltip, href, icon }) {
+function LayerItem({ label, tooltip, href, icon, disabled }) {
   const { hovered, setHovered, tooltipVisible, showTooltip, hideTooltip } = useTooltip();
-  const isMailto = href.startsWith('mailto:');
+  const isMailto = !disabled && href.startsWith('mailto:');
 
   const itemStyle = {
     display: 'flex',
@@ -249,16 +249,17 @@ function LayerItem({ label, tooltip, href, icon }) {
     fontSize: 12,
     fontFamily: 'inherit',
     fontWeight: 400,
-    color: hovered ? '#111' : '#555',
+    color: disabled ? '#aaa' : hovered ? '#111' : '#555',
     textDecoration: 'none',
     padding: '0.3rem 0.5rem',
     borderRadius: 5,
-    background: hovered ? 'rgba(0,0,0,0.05)' : 'none',
+    background: !disabled && hovered ? 'rgba(0,0,0,0.05)' : 'none',
     transition: 'background 0.15s, color 0.15s',
     letterSpacing: '0.01em',
     lineHeight: 1.4,
     width: '100%',
     boxSizing: 'border-box',
+    cursor: disabled ? 'default' : undefined,
   };
 
   const eventHandlers = {
@@ -268,7 +269,7 @@ function LayerItem({ label, tooltip, href, icon }) {
 
   const content = (
     <>
-      <span style={{ flexShrink: 0, opacity: hovered ? 0.9 : 0.45, display: 'flex' }}>
+      <span style={{ flexShrink: 0, opacity: disabled ? 0.35 : hovered ? 0.9 : 0.45, display: 'flex' }}>
         {icon}
       </span>
       {label}
@@ -277,7 +278,11 @@ function LayerItem({ label, tooltip, href, icon }) {
 
   return (
     <li style={{ display: 'flex', position: 'relative' }}>
-      {isMailto ? (
+      {disabled ? (
+        <span aria-disabled="true" {...eventHandlers} style={itemStyle}>
+          {content}
+        </span>
+      ) : isMailto ? (
         <button
           type="button"
           onClick={() => {

@@ -1,7 +1,5 @@
 import './BuildWithUs.css';
-import { Link } from 'react-router-dom';
 import InquiryForm from '../components/InquiryForm';
-import { MoveRight } from 'lucide-react';
 
 export default function BuildWithUs() {
   return (
@@ -23,10 +21,7 @@ export default function BuildWithUs() {
             life? Mockup gives you the talent, creativity, and support to take your
             project from concept to completion. Send us an inquiry and we'll get back to you!
             <br /><br />
-            <strong>Are you a student?</strong> Applications open Fall and Spring.{' '}
-            <Link to="/apply" className="build-apply-link">
-              Apply here <MoveRight size={13} strokeWidth={2.5} style={{ verticalAlign: 'middle' }} />
-            </Link>
+            <strong>Are you a student?</strong> Opportunities open Fall and Spring.
           </p>
         </div>
 

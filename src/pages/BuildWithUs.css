@@ -29,18 +29,6 @@
   margin: 0;
 }
 
-.build-apply-link {
-  color: var(--accent-blue);
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  font-weight: 500;
-  white-space: nowrap;
-}
-
-.build-apply-link:hover {
-  color: #0770bb;
-}
-
 .build-right {
   flex-shrink: 0;
   width: 300px;

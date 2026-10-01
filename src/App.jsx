@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Routes, Route, useLocation, useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,7 +13,6 @@ import Mission from './pages/Mission';
 import Values from './pages/Values';
 import Projects from './pages/Projects';
 import BuildWithUs from './pages/BuildWithUs';
-import Apply from './pages/Apply';
 import PageTransition from './components/PageTransition';
 import UnsupportedScreen from './components/UnsupportedScreen';
 import Footer from './components/Footer';
@@ -49,13 +48,12 @@ function MainSite({ lenisRef }) {
   );
 }
 
-function GlobalNotification({ lenisRef }) {
-  const navigate = useNavigate();
+function GlobalNotification() {
   const location = useLocation();
   if (location.pathname !== '/') return null;
   return (
     <div style={styles.notification}>
-      <Notification onApply={() => { lenisRef.current?.destroy(); navigate('/apply'); }} />
+      <Notification />
     </div>
   );
 }
@@ -98,10 +96,10 @@ export default function App() {
 
   return (
     <>
-      <GlobalNotification lenisRef={lenisRef} />
+      <GlobalNotification />
       <Routes location={location} key={location.pathname}>
         <Route path="/" element={<PageTransition><MainSite lenisRef={lenisRef} /></PageTransition>} />
-        <Route path="/apply" element={<PageTransition><Apply /></PageTransition>} />
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </>
   );

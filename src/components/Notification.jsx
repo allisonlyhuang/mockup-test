@@ -3,8 +3,7 @@ import gsap from "gsap";
 import figmaStar from "../assets/hero/figma_star.svg";
 
 export default function Notification({
-  message = "Fall applications are closing soon. Make sure to apply!",
-  onApply,
+  message = "Roblox Program Kickoff on October 9th @ 7 PM.",
   onDismiss,
 }) {
   const ref = useRef(null);
@@ -40,10 +39,6 @@ export default function Notification({
         <p style={styles.message}>{message}</p>
       </div>
       <div style={styles.actions}>
-        <button style={styles.button} onClick={onApply}>
-          <strong>Apply</strong>
-        </button>
-        <div style={styles.dividerH} />
         <button style={styles.button} onClick={handleDismiss}>
           Dismiss
         </button>

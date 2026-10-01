@@ -1,6 +1,5 @@
 import { useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ChevronDown, MoveRight } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
@@ -107,7 +106,7 @@ export default function Hero() {
         <p className="hero-body">
           Connecting student UI/UX designers with real clients, impactful projects, and career-defining experience.</p>
 
-        <p className="hero-body" style={{ whiteSpace: 'nowrap', margin: '0 0 0.75rem' }}>From portfolios to partnerships. Applications for Fall 2026 open now.{' '}<Link to="/apply" className="hero-apply-link">Apply here <MoveRight size={13} strokeWidth={2.5} style={{ verticalAlign: 'middle' }} /></Link></p>
+        <p className="hero-body" style={{ whiteSpace: 'nowrap', margin: '0 0 0.75rem' }}>From portfolios to partnerships. Opportunities open Fall and Spring.</p>
 
         <button className="hero-learn-more" onClick={scrollToSeasonalProgram}>
           <span className="hero-learn-more-label">Learn More</span>
